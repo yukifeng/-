@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0001C32E2626CC900072D785 /* LinkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0001C32D2626CC900072D785 /* LinkList.swift */; };
 		FE9FED3C24E2A00100173EEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9FED3B24E2A00100173EEC /* AppDelegate.swift */; };
 		FE9FED3E24E2A00100173EEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9FED3D24E2A00100173EEC /* SceneDelegate.swift */; };
 		FE9FED4024E2A00100173EEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9FED3F24E2A00100173EEC /* ViewController.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0001C32D2626CC900072D785 /* LinkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkList.swift; sourceTree = "<group>"; };
 		FE9FED3824E2A00100173EEC /* suanfaStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = suanfaStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE9FED3B24E2A00100173EEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE9FED3D24E2A00100173EEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				FE9FED3D24E2A00100173EEC /* SceneDelegate.swift */,
 				FE9FED3F24E2A00100173EEC /* ViewController.swift */,
 				FE9FED5D24E2A01E00173EEC /* Heap.swift */,
+				0001C32D2626CC900072D785 /* LinkList.swift */,
 				FE9FED4124E2A00100173EEC /* Main.storyboard */,
 				FE9FED4424E2A00500173EEC /* Assets.xcassets */,
 				FE9FED4624E2A00500173EEC /* LaunchScreen.storyboard */,
@@ -205,6 +208,7 @@
 			files = (
 				FE9FED4024E2A00100173EEC /* ViewController.swift in Sources */,
 				FE9FED3C24E2A00100173EEC /* AppDelegate.swift in Sources */,
+				0001C32E2626CC900072D785 /* LinkList.swift in Sources */,
 				FE9FED3E24E2A00100173EEC /* SceneDelegate.swift in Sources */,
 				FE9FED5E24E2A01E00173EEC /* Heap.swift in Sources */,
 			);

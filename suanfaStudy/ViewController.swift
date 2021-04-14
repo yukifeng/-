@@ -13,6 +13,35 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let linklist = LinkList<Int>()
+        linklist.add(10)
+        linklist.add(20)
+        linklist.add(30)
+        linklist.add(40)
+        
+        print(linklist)
+        
+        linklist.add(50,index: 0)
+        print("------------")
+        print(linklist)
+        
+        let num = linklist.remove(index: linklist.size - 1)
+        print(num)
+        
+        print("------------")
+        print(linklist)
+        
+        linklist.add(70, index: 2)
+        print("------------")
+        print(linklist)
+        
+        linklist.remove(index: 0)
+        print("------------")
+        print(linklist)
+        
+        linklist.remove(index: 2)
+        print("------------")
+        print(linklist)
     }
 
 
