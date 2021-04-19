@@ -1,20 +1,21 @@
 //
-//  LinkList.swift
+//  DoubleLinkList.swift
 //  suanfaStudy
 //
-//  Created by edz on 2021/4/14.
+//  Created by edz on 2021/4/16.
 //  Copyright © 2021 段峰. All rights reserved.
-//  单向链表
+//
 
-import Foundation
+import UIKit
 
-class LinkList<E>: CustomStringConvertible {
+class DoubleLinkList<E>: CustomStringConvertible {
     var description: String{
-        return "当前链表的size为：\(size)个，其中的元素：\(self.findAllNode())"
+        return "当前链表的size为：\(size)个，其中的元素：\(self.findAllNode()),倒着数：\(self.reversFindAllNode())"
     }
     
     var size: Int = 0
     var head: Node<E>?
+    var tail: Node<E>?
     
     /// 添加节点到最后的位置
     /// - Parameter element: <#element description#>
@@ -27,14 +28,23 @@ class LinkList<E>: CustomStringConvertible {
     ///   - element: <#element description#>
     ///   - index: <#index description#>
     func add(_ element: E, index: Int){
-        let node = Node(element: element)
-        if index == 0 {
-            node.next = head
-            head = node
+        if index == size { // 添加到链表最后一个位置
+            tail = Node(element: element, next: nil, prev: tail)
+            if size == 0 { // 链表为空，第一次添加节点
+                head = tail
+            }else{
+                tail?.prev?.next = tail
+            }
         }else{
-            let preNode = try! self.node(index: index - 1)
-            node.next = preNode?.next
-            preNode?.next = node
+            let node = Node(element: element,next: try! self.node(index: index))
+            if index == 0 { // 添加到第0个位置
+                head = node
+                node.prev = nil
+            }else{
+                node.prev = node.next?.prev
+                node.prev?.next = node
+            }
+            node.next?.prev = node
         }
         size += 1
     }
@@ -45,11 +55,15 @@ class LinkList<E>: CustomStringConvertible {
     func remove(index: Int) -> E?{
         let node = try! self.node(index: index)
         
-        if index == 0 {
+        if node?.prev == nil { // 第一个元素
             head = node?.next
         }else{
-            let preNode = try! self.node(index: index - 1)
-            preNode?.next = node?.next
+            node?.prev?.next = node?.next
+        }
+        if node?.next == nil { // 最后一个元素
+            tail = node?.prev
+        }else{
+            node?.next?.prev = node?.prev
         }
         
         size -= 1
@@ -60,6 +74,11 @@ class LinkList<E>: CustomStringConvertible {
     func clear(){
         size = 0
         head = nil
+        tail = nil
+    }
+    
+    deinit {
+        print("内存被释放掉了，没有溢出")
     }
     
     /// 获取index位置的node节点
@@ -70,8 +89,14 @@ class LinkList<E>: CustomStringConvertible {
         if rangeCheck(index: index) {
             throw NSError(domain: "越界", code: -999, userInfo: nil)
         }
-        var node = head
-        if index != 0 {
+        var node: Node<E>?
+        if index >= (size >> 1) { // 在后半部分
+            node = tail
+            for _ in (index..<size - 1).reversed() {
+                node = node?.prev
+            }
+        }else{ // 在前半部分
+            node = head
             for _ in 0..<index {
                 node = node?.next
             }
@@ -99,26 +124,16 @@ class LinkList<E>: CustomStringConvertible {
         return list
     }
     
-}
-
-class Node<E> {
-    var element: E
-    var next: Node?
-    var prev: Node?
-    
-    init(element: E, next: Node?) {
-        self.element = element
-        self.next = next
-    }
-    
-    init(element: E, next: Node?, prev: Node?) {
-        self.element = element
-        self.next = next
-        self.prev = prev
-    }
-    
-    init(element: E) {
-        self.element = element
+    private func reversFindAllNode() -> [E]{
+        var node = tail
+        var list = [E]()
+        while node != nil {
+            if node != nil {
+                list.append(node!.element)
+                node = node?.prev
+            }
+        }
+        return list
     }
     
 }

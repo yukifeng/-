@@ -13,6 +13,34 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let doubleLink = DoubleLinkList<Int>()
+        doubleLink.add(10)
+        doubleLink.add(20)
+        doubleLink.add(30)
+        doubleLink.add(40, index: 0)
+        doubleLink.add(50, index: doubleLink.size)
+        
+        print(doubleLink)
+        print("------------")
+        
+        doubleLink.remove(index: 0)
+        print(doubleLink)
+        print("------------")
+        
+        doubleLink.remove(index: doubleLink.size - 1)
+        print(doubleLink)
+        print("------------")
+        
+        doubleLink.remove(index: 1)
+        print(doubleLink)
+        print("------------")
+        
+        doubleLink.clear()
+        print(doubleLink)
+        print("------------")
+    }
+
+    func singleListNode(){
         let linklist = LinkList<Int>()
         linklist.add(10)
         linklist.add(20)
@@ -25,7 +53,7 @@ class ViewController: UIViewController {
         print("------------")
         print(linklist)
         
-        let num = linklist.remove(index: linklist.size - 1)
+        let num = linklist.remove(index: linklist.size)
         print(num)
         
         print("------------")
@@ -42,8 +70,12 @@ class ViewController: UIViewController {
         linklist.remove(index: 2)
         print("------------")
         print(linklist)
+        
+        
+        linklist.clear()
+        print("------------")
+        print(linklist)
     }
-
 
 }
 
