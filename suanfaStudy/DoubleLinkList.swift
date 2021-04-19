@@ -72,9 +72,17 @@ class DoubleLinkList<E>: CustomStringConvertible {
     
     /// 清空元素
     func clear(){
-        size = 0
+        var node = tail
+        while node != nil {
+            let old = node
+            node = node?.prev
+            old?.prev = nil
+        }
+        
         head = nil
         tail = nil
+        size = 0
+        
     }
     
     deinit {

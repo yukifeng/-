@@ -10,34 +10,11 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        let doubleLink = DoubleLinkList<Int>()
-        doubleLink.add(10)
-        doubleLink.add(20)
-        doubleLink.add(30)
-        doubleLink.add(40, index: 0)
-        doubleLink.add(50, index: doubleLink.size)
         
-        print(doubleLink)
-        print("------------")
-        
-        doubleLink.remove(index: 0)
-        print(doubleLink)
-        print("------------")
-        
-        doubleLink.remove(index: doubleLink.size - 1)
-        print(doubleLink)
-        print("------------")
-        
-        doubleLink.remove(index: 1)
-        print(doubleLink)
-        print("------------")
-        
-        doubleLink.clear()
-        print(doubleLink)
-        print("------------")
     }
 
     func singleListNode(){

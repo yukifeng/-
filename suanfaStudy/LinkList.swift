@@ -121,4 +121,7 @@ class Node<E> {
         self.element = element
     }
     
+    deinit {
+        print("node 内存被释放掉了，没有溢出")
+    }
 }
