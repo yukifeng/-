@@ -1,14 +1,14 @@
 //
-//  LinkList.swift
+//  SingleCircleLinkList.swift
 //  suanfaStudy
 //
-//  Created by edz on 2021/4/14.
+//  Created by edz on 2021/4/20.
 //  Copyright © 2021 段峰. All rights reserved.
-//  单向链表
+//
 
 import Foundation
 
-class LinkList<E>: CustomStringConvertible {
+class SingleCircleLinkList<E>: CustomStringConvertible {
     var description: String{
         return "当前链表的size为：\(size)个，其中的元素：\(self.findAllNode())"
     }
@@ -27,16 +27,28 @@ class LinkList<E>: CustomStringConvertible {
     ///   - element: <#element description#>
     ///   - index: <#index description#>
     func add(_ element: E, index: Int){
+        size += 1
         let node = Node(element: element)
         if index == 0 {
             node.next = head
             head = node
+            
+            if size == 0 { // 第一次添加节点，指向自己
+                head?.next = head
+            }else{
+                let tail = try! self.node(index: size - 1)
+                tail?.next = head
+            }
         }else{
             let preNode = try! self.node(index: index - 1)
             node.next = preNode?.next
             preNode?.next = node
+            
+            let tail = try! self.node(index: size - 1)
+            tail?.next = head
         }
-        size += 1
+        
+        
     }
     
     /// 移除第index位置的节点
@@ -44,9 +56,14 @@ class LinkList<E>: CustomStringConvertible {
     /// - Returns: <#description#>
     func remove(index: Int) -> E?{
         let node = try! self.node(index: index)
+        let tail = try! self.node(index: size - 1)
         
         if index == 0 {
             head = node?.next
+            tail?.next = node?.next
+            if size == 1 {
+                self.clear()
+            }
         }else{
             let preNode = try! self.node(index: index - 1)
             preNode?.next = node?.next
@@ -58,7 +75,10 @@ class LinkList<E>: CustomStringConvertible {
     
     /// 清空元素
     func clear(){
+        let tail = try! self.node(index: size - 1)
+
         size = 0
+        tail?.next = nil
         head = nil
     }
     
@@ -86,42 +106,21 @@ class LinkList<E>: CustomStringConvertible {
         return false
     }
     
-    private func findAllNode() -> [E]{
+    private func findAllNode() -> [Node<E>]{
         var node = head
-        var list = [E]()
+        var list = [Node<E>]()
         
+        var idx = 0
         while node != nil {
-            if node != nil {
-                list.append(node!.element)
-                node = node?.next
+            if idx == size {
+                break
             }
+            list.append(node!)
+            node = node?.next
+            idx += 1
+            
         }
         return list
     }
     
-}
-
-class Node<E> {
-    var element: E
-    var next: Node?
-    var prev: Node?
-    
-    init(element: E, next: Node?) {
-        self.element = element
-        self.next = next
-    }
-    
-    init(element: E, next: Node?, prev: Node?) {
-        self.element = element
-        self.next = next
-        self.prev = prev
-    }
-    
-    init(element: E) {
-        self.element = element
-    }
-    
-    deinit {
-        print("node 内存被释放掉了，没有溢出")
-    }
 }
