@@ -12,11 +12,57 @@ class SecViewController: UIViewController {
 
     var doubleLink = DoubleLinkList<Int>()
     var singleCircleLink = SingleCircleLinkList<Int>()
+    var doubleCircleLink = DoubleCircleLinkList<Int>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        signleCircleList()
+        doubleCiycle()
+    }
+    
+    private func doubleCiycle() {
+//        doubleCircleLink.add(11)
+//        print(doubleCircleLink)
+//        print("------------")
+//        doubleCircleLink.add(22)
+//        print(doubleCircleLink)
+//        print("------------")
+//        doubleCircleLink.add(33)
+//        print(doubleCircleLink)
+//        print("------------")
+//        doubleCircleLink.add(44, index: 0) // 44, 11, 22,33
+//        print(doubleCircleLink)
+//        print("------------")
+//        doubleCircleLink.add(55, index: 2)// 44,11,55,22,33
+//        print(doubleCircleLink)
+//        print("------------")
+//        doubleCircleLink.remove(index: 0) // 11,55,22,33
+//        print(doubleCircleLink)
+//        print("------------")
+//        doubleCircleLink.remove(index: doubleCircleLink.size - 1) // 11,55,22
+//        print(doubleCircleLink)
+//        print("------------")
+//        doubleCircleLink.remove(index: 1) // 11,22
+//        print(doubleCircleLink)
+//        print("------------")
+//        doubleCircleLink.remove(index: 0) // 22
+//        print(doubleCircleLink)
+//        print("------------")
+//        doubleCircleLink.remove(index: 0) // []
+//        print(doubleCircleLink)
+//        print("------------")
+        
+        doubleCircleLink.add(33)
+        doubleCircleLink.add(33)
+        doubleCircleLink.add(33)
+        doubleCircleLink.add(33)
+        doubleCircleLink.add(33)
+        doubleCircleLink.add(33)
+        doubleCircleLink.add(33)
+        
+        doubleCircleLink.clear()
+        print(doubleCircleLink)
+        print("------------")
     }
     
     private func signleCircleList(){
@@ -27,12 +73,6 @@ class SecViewController: UIViewController {
         print(singleCircleLink)
         print("------------")
         singleCircleLink.add(30, index: singleCircleLink.size)
-        print(singleCircleLink)
-        print("------------")
-        singleCircleLink.remove(index: 0)
-        print(singleCircleLink)
-        print("------------")
-        singleCircleLink.remove(index: singleCircleLink.size - 1)
         print(singleCircleLink)
         print("------------")
         singleCircleLink.add(40, index: 0)

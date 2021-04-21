@@ -1,20 +1,21 @@
 //
-//  SingleCircleLinkList.swift
+//  DoubleCircleLinkList.swift
 //  suanfaStudy
 //
-//  Created by edz on 2021/4/20.
+//  Created by edz on 2021/4/21.
 //  Copyright © 2021 段峰. All rights reserved.
-// 单向循环链表
+//
 
 import Foundation
 
-class SingleCircleLinkList<E>: CustomStringConvertible {
+class DoubleCircleLinkList<E>: CustomStringConvertible {
     var description: String{
         return "当前链表的size为：\(size)个，其中的元素：\(self.findAllNode())"
     }
     
     var size: Int = 0
     var head: Node<E>?
+    var tail: Node<E>?
     
     /// 添加节点到最后的位置
     /// - Parameter element: <#element description#>
@@ -27,28 +28,28 @@ class SingleCircleLinkList<E>: CustomStringConvertible {
     ///   - element: <#element description#>
     ///   - index: <#index description#>
     func add(_ element: E, index: Int){
-        size += 1
-        let node = Node(element: element)
-        if index == 0 {
-            node.next = head
-            head = node
-            
-            if size == 0 { // 第一次添加节点，指向自己
-                head?.next = head
+        if index == size { // 添加到链表最后一个位置
+            tail = Node(element: element, next: head, prev: tail)
+            if size == 0 { // 链表为空，第一次添加节点
+                head = tail
             }else{
-                let tail = try! self.node(index: size - 1)
-                tail?.next = head
+                tail?.prev?.next = tail
             }
-        }else{
-            let preNode = try! self.node(index: index - 1)
-            node.next = preNode?.next
-            preNode?.next = node
-            
-            let tail = try! self.node(index: size - 1)
+            head?.prev = tail
             tail?.next = head
+        }else{
+            let node = Node(element: element,next: try! self.node(index: index))
+            if index == 0 { // 添加到第0个位置
+                head = node
+                node.prev = tail
+                tail?.next = node
+            }else{
+                node.prev = node.next?.prev
+                node.prev?.next = node
+            }
+            node.next?.prev = node
         }
-        
-        
+        size += 1
     }
     
     /// 移除第index位置的节点
@@ -56,17 +57,21 @@ class SingleCircleLinkList<E>: CustomStringConvertible {
     /// - Returns: <#description#>
     func remove(index: Int) -> E?{
         let node = try! self.node(index: index)
-        let tail = try! self.node(index: size - 1)
         
-        if index == 0 {
+        if index == 0 { // 第一个元素
             head = node?.next
+            node?.next?.prev = tail
             tail?.next = node?.next
-            if size == 1 {
-                self.clear()
-            }
+        }else {
+            node?.prev?.next = node?.next
+        }
+        
+        if index == size - 1 { // 最后一个元素
+            tail = node?.prev
+            node?.prev?.next = head
+            head?.prev = node?.prev
         }else{
-            let preNode = try! self.node(index: index - 1)
-            preNode?.next = node?.next
+            node?.next?.prev = node?.prev
         }
         
         size -= 1
@@ -75,11 +80,22 @@ class SingleCircleLinkList<E>: CustomStringConvertible {
     
     /// 清空元素
     func clear(){
-        let tail = try! self.node(index: size - 1)
-
-        size = 0
-        tail?.next = nil
+        var node = tail
+        while node != nil {
+            let old = node
+            node = node?.prev
+            old?.prev = nil
+            old?.next = nil
+        }
+        
         head = nil
+        tail = nil
+        size = 0
+        
+    }
+    
+    deinit {
+        print("内存被释放掉了，没有溢出")
     }
     
     /// 获取index位置的node节点
@@ -90,8 +106,14 @@ class SingleCircleLinkList<E>: CustomStringConvertible {
         if rangeCheck(index: index) {
             throw NSError(domain: "越界", code: -999, userInfo: nil)
         }
-        var node = head
-        if index != 0 {
+        var node: Node<E>?
+        if index >= (size >> 1) { // 在后半部分
+            node = tail
+            for _ in (index..<size - 1).reversed() {
+                node = node?.prev
+            }
+        }else{ // 在前半部分
+            node = head
             for _ in 0..<index {
                 node = node?.next
             }
@@ -122,5 +144,4 @@ class SingleCircleLinkList<E>: CustomStringConvertible {
         }
         return list
     }
-    
 }
