@@ -17,6 +17,34 @@ class DoubleCircleLinkList<E>: CustomStringConvertible {
     var head: Node<E>?
     var tail: Node<E>?
     
+    /// 用于指向某节点
+    var current: Node<E>?
+    
+    /// 将current指向head
+    func reset() {
+        current = head
+    }
+    
+    /// 将current指向下一个节点
+    /// - Returns: description
+    func next() -> Node<E> {
+        current = current?.next
+        // 循环链表没有空
+        return current!
+    }
+    
+    /// 移除current指向的节点，current指向下一个节点
+    /// - Returns: <#description#>
+    func remove() -> E? {
+        if current == nil {
+            return nil
+        }
+        let r = remove(current!)
+        current = current?.next
+        print("-----\(current?.element)")
+        return r
+    }
+    
     /// 添加节点到最后的位置
     /// - Parameter element: <#element description#>
     func add(_ element: E) {
@@ -52,30 +80,38 @@ class DoubleCircleLinkList<E>: CustomStringConvertible {
         size += 1
     }
     
+    private func remove(_ node: Node<E>) -> E {
+        if head == node { // 第一个元素
+            head = node.next
+            node.next?.prev = tail
+            tail?.next = node.next
+        }else {
+            node.prev?.next = node.next
+        }
+        
+        if node == tail { // 最后一个元素
+            tail = node.prev
+            node.prev?.next = head
+            head?.prev = node.prev
+        }else{
+            node.next?.prev = node.prev
+        }
+        
+        
+        if size == 1 {
+            head = nil
+            tail = nil
+            current = nil
+        }
+        size -= 1
+        return node.element
+    }
     /// 移除第index位置的节点
     /// - Parameter index: <#index description#>
     /// - Returns: <#description#>
     func remove(index: Int) -> E?{
         let node = try! self.node(index: index)
-        
-        if index == 0 { // 第一个元素
-            head = node?.next
-            node?.next?.prev = tail
-            tail?.next = node?.next
-        }else {
-            node?.prev?.next = node?.next
-        }
-        
-        if index == size - 1 { // 最后一个元素
-            tail = node?.prev
-            node?.prev?.next = head
-            head?.prev = node?.prev
-        }else{
-            node?.next?.prev = node?.prev
-        }
-        
-        size -= 1
-        return node?.element
+        return remove(node!)
     }
     
     /// 清空元素

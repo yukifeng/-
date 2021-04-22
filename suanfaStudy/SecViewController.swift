@@ -17,52 +17,68 @@ class SecViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        doubleCiycle()
+        jejos()
+    }
+    
+    private func jejos(){
+        let double = DoubleCircleLinkList<Int>()
+        for i in 1...8 {
+            double.add(i)
+        }
+        double.reset()
+        
+        while double.head != nil {
+            double.next()
+            double.next()
+            let r = double.remove()
+            print(r!) // 最后一个节点的内存没有释放掉
+        }
+        
     }
     
     private func doubleCiycle() {
-//        doubleCircleLink.add(11)
-//        print(doubleCircleLink)
-//        print("------------")
-//        doubleCircleLink.add(22)
-//        print(doubleCircleLink)
-//        print("------------")
-//        doubleCircleLink.add(33)
-//        print(doubleCircleLink)
-//        print("------------")
-//        doubleCircleLink.add(44, index: 0) // 44, 11, 22,33
-//        print(doubleCircleLink)
-//        print("------------")
-//        doubleCircleLink.add(55, index: 2)// 44,11,55,22,33
-//        print(doubleCircleLink)
-//        print("------------")
-//        doubleCircleLink.remove(index: 0) // 11,55,22,33
-//        print(doubleCircleLink)
-//        print("------------")
-//        doubleCircleLink.remove(index: doubleCircleLink.size - 1) // 11,55,22
-//        print(doubleCircleLink)
-//        print("------------")
-//        doubleCircleLink.remove(index: 1) // 11,22
-//        print(doubleCircleLink)
-//        print("------------")
-//        doubleCircleLink.remove(index: 0) // 22
-//        print(doubleCircleLink)
-//        print("------------")
-//        doubleCircleLink.remove(index: 0) // []
-//        print(doubleCircleLink)
-//        print("------------")
-        
-        doubleCircleLink.add(33)
-        doubleCircleLink.add(33)
-        doubleCircleLink.add(33)
-        doubleCircleLink.add(33)
-        doubleCircleLink.add(33)
-        doubleCircleLink.add(33)
-        doubleCircleLink.add(33)
-        
-        doubleCircleLink.clear()
+        doubleCircleLink.add(11) // 11
         print(doubleCircleLink)
         print("------------")
+        doubleCircleLink.add(22) // 11, 22
+        print(doubleCircleLink)
+        print("------------")
+        doubleCircleLink.add(33) // 11, 22, 33
+        print(doubleCircleLink)
+        print("------------")
+        doubleCircleLink.add(44, index: 0) // 44, 11, 22,33
+        print(doubleCircleLink)
+        print("------------")
+        doubleCircleLink.add(55, index: 2)// 44,11,55,22,33
+        print(doubleCircleLink)
+        print("------------")
+        doubleCircleLink.remove(index: 0) // 11,55,22,33
+        print(doubleCircleLink)
+        print("------------")
+        doubleCircleLink.remove(index: doubleCircleLink.size - 1) // 11,55,22
+        print(doubleCircleLink)
+        print("------------")
+        doubleCircleLink.remove(index: 1) // 11,22
+        print(doubleCircleLink)
+        print("------------")
+        doubleCircleLink.remove(index: 0) // 22
+        print(doubleCircleLink)
+        print("------------")
+        doubleCircleLink.remove(index: 0) // []
+        print(doubleCircleLink)
+        print("------------")
+        
+//        doubleCircleLink.add(33)
+//        doubleCircleLink.add(33)
+//        doubleCircleLink.add(33)
+//        doubleCircleLink.add(33)
+//        doubleCircleLink.add(33)
+//        doubleCircleLink.add(33)
+//        doubleCircleLink.add(33)
+//
+//        doubleCircleLink.clear()
+//        print(doubleCircleLink)
+//        print("------------")
     }
     
     private func signleCircleList(){

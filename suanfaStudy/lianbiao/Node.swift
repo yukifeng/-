@@ -8,8 +8,11 @@
 
 import Foundation
 
-class Node<E>: CustomStringConvertible {
-    var description: String{
+class Node<E>: NSObject {
+    
+    
+    
+    override var description: String{
         return debugPrint()
     }
     
