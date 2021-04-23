@@ -13,11 +13,41 @@ class SecViewController: UIViewController {
     var doubleLink = DoubleLinkList<Int>()
     var singleCircleLink = SingleCircleLinkList<Int>()
     var doubleCircleLink = DoubleCircleLinkList<Int>()
+    var stack = Stack<Int>()
+    var queue = Queue<Int>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        jejos()
+        kuohaoScroe()
+    }
+    
+    private func kuohaoScroe() {
+        let reuslt = ScoreOfParentheses().scoreOfParentheses("()")
+        print(reuslt)
+    }
+    
+    private func queueTest(){
+        queue.offer(11)
+        queue.offer(22)
+        queue.offer(33)
+        queue.offer(44)
+        queue.offer(55)
+        
+        while !queue.isEmpty() {
+            print(queue.poll())
+        }
+    }
+    
+    private func stackTest() {
+        for i in 0..<10 {
+            stack.push(i)
+        }
+        while !stack.isEmpty() {
+            let e = stack.pop()
+            print("size:\(stack.size)  element:\(String(describing: e)) 顶部\(stack.peek())")
+        }
+        
     }
     
     private func jejos(){
