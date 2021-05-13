@@ -19,7 +19,42 @@ class SecViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        kuohaoScroe()
+        bst()
+    }
+    
+    private func bst(){
+        let bst = BinarySearchTree<Int>()
+        let arr = [39, 74, 83, 32, 54, 98, 6, 63, 94, 59, 29]
+        
+        for i in 0..<arr.count {
+            bst.add(element: arr[i])
+        }
+        print("-------------\(bst.height)")
+        print(bst)
+    }
+    
+    private func orderTree(tree: BinarySearchTree<Int>){
+        let queue = Queue<TreeNode<Int>>()
+        var array = Array<Int>()
+        
+        var node = tree.rootNode
+        if node == nil {
+            return
+        }
+        
+        queue.offer(node!)
+        
+        while !queue.isEmpty() {
+             node = queue.poll()
+            array.append(node!.element)
+            if node?.left != nil {
+                queue.offer(node!.left!)
+            }
+            if node?.right != nil {
+                queue.offer(node!.right!)
+            }
+        }
+        print(array)
     }
     
     private func kuohaoScroe() {
@@ -158,4 +193,9 @@ class SecViewController: UIViewController {
         print("+++++++++++")
     }
 
+}
+
+
+class Person {
+    var age = 0
 }

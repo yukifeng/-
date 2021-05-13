@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00006AA2264910B7000D53C8 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00006AA1264910B7000D53C8 /* BinarySearchTree.swift */; };
 		0001C32E2626CC900072D785 /* LinkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0001C32D2626CC900072D785 /* LinkList.swift */; };
 		0001C41126296BB60072D785 /* DoubleLinkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0001C41026296BB50072D785 /* DoubleLinkList.swift */; };
 		00104776262D31FB001E6465 /* SecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00104775262D31FB001E6465 /* SecViewController.swift */; };
@@ -48,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		00006AA1264910B7000D53C8 /* BinarySearchTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySearchTree.swift; sourceTree = "<group>"; };
+		00006AC4264A343A000D53C8 /* suanfaStudy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "suanfaStudy-Bridging-Header.h"; sourceTree = "<group>"; };
 		0001C32D2626CC900072D785 /* LinkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkList.swift; sourceTree = "<group>"; };
 		0001C41026296BB50072D785 /* DoubleLinkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleLinkList.swift; sourceTree = "<group>"; };
 		00104775262D31FB001E6465 /* SecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecViewController.swift; sourceTree = "<group>"; };
@@ -100,6 +103,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		00006AA02648D6B0000D53C8 /* 树 */ = {
+			isa = PBXGroup;
+			children = (
+				00006AA1264910B7000D53C8 /* BinarySearchTree.swift */,
+			);
+			path = "树";
+			sourceTree = "<group>";
+		};
 		004E186426314D6B0093563C /* leetcode */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				004E186426314D6B0093563C /* leetcode */,
+				00006AA02648D6B0000D53C8 /* 树 */,
 				004E189526327C740093563C /* 队列 */,
 				00B11B7A2630176300F7CC5D /* 栈 */,
 				00B11B16262E732100F7CC5D /* lianbiao */,
@@ -197,6 +209,7 @@
 				FE9FED4424E2A00500173EEC /* Assets.xcassets */,
 				FE9FED4624E2A00500173EEC /* LaunchScreen.storyboard */,
 				FE9FED4924E2A00500173EEC /* Info.plist */,
+				00006AC4264A343A000D53C8 /* suanfaStudy-Bridging-Header.h */,
 			);
 			path = suanfaStudy;
 			sourceTree = "<group>";
@@ -260,6 +273,7 @@
 				TargetAttributes = {
 					FE9FED3724E2A00100173EEC = {
 						CreatedOnToolsVersion = 11.6;
+						LastSwiftMigration = 1240;
 					};
 					FE9FED4D24E2A00500173EEC = {
 						CreatedOnToolsVersion = 11.6;
@@ -320,6 +334,7 @@
 				00104776262D31FB001E6465 /* SecViewController.swift in Sources */,
 				004E187D26314DBC0093563C /* 203. 移除链表元素.swift in Sources */,
 				004E187B26314DBC0093563C /* 83. 删除排序链表中的重复元素.swift in Sources */,
+				00006AA2264910B7000D53C8 /* BinarySearchTree.swift in Sources */,
 				004E188826315B480093563C /* 856. 括号的分数.swift in Sources */,
 				00B11B1E262E73EF00F7CC5D /* Node.swift in Sources */,
 				004E187C26314DBC0093563C /* ListNode.swift in Sources */,
@@ -494,6 +509,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = suanfaStudy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -502,6 +518,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = SaitouAsukaHaOreNoYome.suanfaStudy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "suanfaStudy/suanfaStudy-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -511,6 +529,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = suanfaStudy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -519,6 +538,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = SaitouAsukaHaOreNoYome.suanfaStudy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "suanfaStudy/suanfaStudy-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
