@@ -43,7 +43,7 @@ class BinarySearchTree<E: Comparable>: NSObject {
     override init() {}
     
     private func printTree(node: TreeNode<E>, str: inout String, prefix: String) {
-        str += "\(prefix)\(node.element)\n"
+        str += "\(prefix)\(node.element)___p:\(String(describing: node.parent?.element))\n"
         if node.left != nil {
             printTree(node: node.left!, str: &str, prefix: "\(prefix)[L]")
         }
@@ -55,12 +55,13 @@ class BinarySearchTree<E: Comparable>: NSObject {
     /// 是否为空
     /// - Returns: <#description#>
     func isEmpty() -> Bool {
-        return false
+        return size == 0
     }
     
     /// 清空所有元素
     func clear() {
-        
+        rootNode = nil
+        size = 0
     }
     
     /// 添加元素
@@ -95,13 +96,80 @@ class BinarySearchTree<E: Comparable>: NSObject {
             parent?.left = newNode
         }
         
-        
+        size += 1
     }
+    
     
     /// 删除元素
     /// - Parameter e: <#e description#>
     func remove(element:E) {
+        let node = search(element)
+        if node == nil {
+            print("未找到元素\(element)")
+            return
+        }
+        remove(node: node!)
+    }
+    
+    private func remove(node: TreeNode<E>) {
+        if node.isLeafNode() { // 是叶子节点，直接删除
+            if node.parent == nil { // node是根节点且只有一个根节点
+                clear()
+            }else {
+                if node == node.parent!.left { // 非根节点的叶子节点
+                    node.parent?.left = nil
+                }else {
+                    node.parent?.right = nil
+                }
+            }
+        }else if node.hasTwoChild() { // 度为2的节点
+            let succNode = successor(node)
+            node.element = succNode!.element // 度为2一定有前驱
+            remove(node: succNode!)
+        }else { // 度为1的节点
+            if node.left != nil { // 左子节点不为空
+                node.left!.parent = node.parent
+                if node.parent?.left == node {
+                    node.parent!.left = node.left
+                }else {
+                    node.parent?.right = node.left
+                }
+            }else { // 右子节点不为空
+                node.right!.parent = node.parent
+                if node.parent?.left == node {
+                    node.parent!.left = node.right
+                }else {
+                    node.parent?.right = node.right
+                }
+            }
+            
+            
+        }
+    }
+    
+    /// 通过元素查找节点
+    /// - Parameter element: <#element description#>
+    /// - Returns: <#description#>
+    private func search(_ element: E) -> TreeNode<E>? {
+        if rootNode == nil {
+            return nil
+        }
+        var node = rootNode
         
+        var cmp = compare(e1: element, e2: node!.element)
+        
+        while cmp != .orderedSame {
+            if cmp == .orderedAscending {
+                node = node?.left
+            }else {
+                node = node?.right
+            }
+            if node == nil {
+                return nil
+            }
+            cmp = compare(e1: element, e2: node!.element)
+        }
+        return node
     }
     
     /// 是否包含某元素
@@ -156,7 +224,7 @@ class BinarySearchTree<E: Comparable>: NSObject {
     func successor(_ node: TreeNode<E>) -> TreeNode<E>? {
         var child = node.right
         if child != nil { // node有右子节点
-            while child != nil { // node.right.left.left...
+            while child?.left != nil { // node.right.left.left...
                 child = child?.left
             }
             return child
@@ -201,6 +269,7 @@ class BinarySearchTree<E: Comparable>: NSObject {
         }
         
         visitor(node!.element)
+//        print("\(node!.element)_前驱：\(predecessor(node!)?.element)_后继：\(successor(node!)?.element)_父节点\(node?.parent)")
         preorderTravelsal(node!.left, visitor: visitor)
         preorderTravelsal(node!.right, visitor: visitor)
     }
@@ -286,6 +355,10 @@ class TreeNode<E>: NSObject {
     func hasTwoChild() -> Bool {
         return left != nil && right != nil
     }
+    
+//    override var description: String {
+//        return "element:\(element)_left:\(String(describing: left))_right:\(String(describing: right))_parent:\(String(describing: parent))"
+//    }
 }
 
 

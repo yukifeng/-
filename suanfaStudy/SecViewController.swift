@@ -29,8 +29,35 @@ class SecViewController: UIViewController {
         for i in 0..<arr.count {
             bst.add(element: arr[i])
         }
-        print("-------------\(bst.height)")
+        
+        bst.remove(element: 94)
         print(bst)
+        
+//        let node = bst.search(6)
+//        print(asdf(node: node))
+//        
+//        let node2 = bst.search(29)
+//        print(asdf(node: node2))
+//        
+//        let node3 = bst.search(94)
+//        print(asdf(node: node3))
+//        
+//        let node4 = bst.search(74)
+//        print(asdf(node: node4))
+//        
+//        let node5 = bst.search(39)
+//        print(asdf(node: node5))
+//        
+//        let node6 = bst.search(1111)
+//        print(asdf(node: node6))
+//        print("-------------\(bst.height)")
+//        bst.preorderTravelsal { (e) in
+//
+//        }
+    }
+    
+    func asdf(node: TreeNode<Int>?) -> String {
+        return "element:\(node?.element)_left:\(node?.left?.element)_right:\(node?.right?.element)_parent:\(node?.parent?.element)"
     }
     
     private func orderTree(tree: BinarySearchTree<Int>){
