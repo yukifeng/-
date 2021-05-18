@@ -25,6 +25,18 @@ class suanfaStudyTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
+    func testAVLTree() throws {
+        let avlTree = AVLTree<Int>()
+
+        for _ in 0..<10000 {
+            let random = Int(arc4random())
+            avlTree.add(element: random)
+        }
+        avlTree.preorderTravelsal2 { (node) in
+            XCTAssert(abs((node as! AVLNode).getBlanceFactor()) <= 1, "平衡出错了")
+        }
+    }
+    
     func testHeapCreate() throws {
         for _ in 0..<10 {
             let random = Int(arc4random()) % 100

@@ -18,8 +18,21 @@ class SecViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        bst()
+        avl()
+    }
+    
+    private func avl() {
+        let avl = AVLTree<Int>()
+        let arr = [18, 57, 13, 22, 31, 73, 4, 25, 36, 72, 74, 8, 90, 30, 89, 44, 11, 41]
+        
+        for i in 0..<arr.count {
+            avl.add(element: arr[i])
+        }
+        for i in 0..<arr.count {
+            avl.remove(element: arr[i])
+            print("================")
+            print(avl)
+        }
     }
     
     private func bst(){

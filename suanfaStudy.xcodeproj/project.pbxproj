@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00006AA2264910B7000D53C8 /* BinarySearchTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00006AA1264910B7000D53C8 /* BinarySearchTree.swift */; };
+		00006AE6264D2D6E000D53C8 /* BinaryTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00006AE5264D2D6E000D53C8 /* BinaryTree.swift */; };
 		0001C32E2626CC900072D785 /* LinkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0001C32D2626CC900072D785 /* LinkList.swift */; };
 		0001C41126296BB60072D785 /* DoubleLinkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0001C41026296BB50072D785 /* DoubleLinkList.swift */; };
 		00104776262D31FB001E6465 /* SecViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00104775262D31FB001E6465 /* SecViewController.swift */; };
@@ -24,6 +25,7 @@
 		004E188826315B480093563C /* 856. 括号的分数.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004E188726315B480093563C /* 856. 括号的分数.swift */; };
 		004E188C26325D4C0093563C /* 150. 逆波兰表达式求值.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004E188B26325D4C0093563C /* 150. 逆波兰表达式求值.swift */; };
 		004E189726327CD20093563C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004E189626327CD20093563C /* Queue.swift */; };
+		00841767264E5FE6001EDB99 /* AVLTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00841766264E5FE6001EDB99 /* AVLTree.swift */; };
 		00B11B13262E731400F7CC5D /* SingleCircleLinkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B11B12262E731400F7CC5D /* SingleCircleLinkList.swift */; };
 		00B11B1E262E73EF00F7CC5D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B11B1D262E73EF00F7CC5D /* Node.swift */; };
 		00B11B7E26301B3200F7CC5D /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B11B7D26301B3200F7CC5D /* Stack.swift */; };
@@ -51,6 +53,7 @@
 /* Begin PBXFileReference section */
 		00006AA1264910B7000D53C8 /* BinarySearchTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinarySearchTree.swift; sourceTree = "<group>"; };
 		00006AC4264A343A000D53C8 /* suanfaStudy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "suanfaStudy-Bridging-Header.h"; sourceTree = "<group>"; };
+		00006AE5264D2D6E000D53C8 /* BinaryTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryTree.swift; sourceTree = "<group>"; };
 		0001C32D2626CC900072D785 /* LinkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkList.swift; sourceTree = "<group>"; };
 		0001C41026296BB50072D785 /* DoubleLinkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleLinkList.swift; sourceTree = "<group>"; };
 		00104775262D31FB001E6465 /* SecViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +70,7 @@
 		004E188726315B480093563C /* 856. 括号的分数.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "856. 括号的分数.swift"; sourceTree = "<group>"; };
 		004E188B26325D4C0093563C /* 150. 逆波兰表达式求值.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "150. 逆波兰表达式求值.swift"; sourceTree = "<group>"; };
 		004E189626327CD20093563C /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		00841766264E5FE6001EDB99 /* AVLTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVLTree.swift; sourceTree = "<group>"; };
 		00B11B12262E731400F7CC5D /* SingleCircleLinkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCircleLinkList.swift; sourceTree = "<group>"; };
 		00B11B1D262E73EF00F7CC5D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		00B11B7D26301B3200F7CC5D /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
@@ -107,6 +111,8 @@
 			isa = PBXGroup;
 			children = (
 				00006AA1264910B7000D53C8 /* BinarySearchTree.swift */,
+				00006AE5264D2D6E000D53C8 /* BinaryTree.swift */,
+				00841766264E5FE6001EDB99 /* AVLTree.swift */,
 			);
 			path = "树";
 			sourceTree = "<group>";
@@ -325,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00841767264E5FE6001EDB99 /* AVLTree.swift in Sources */,
 				004E187526314DBC0093563C /* 2. 两数相加.swift in Sources */,
 				00B11B8226301C7C00F7CC5D /* DoubleCircleLinkList.swift in Sources */,
 				004E187A26314DBC0093563C /* 237删除链表中给定的节点.swift in Sources */,
@@ -347,6 +354,7 @@
 				FE9FED3E24E2A00100173EEC /* SceneDelegate.swift in Sources */,
 				004E189726327CD20093563C /* Queue.swift in Sources */,
 				004E188226314DEE0093563C /* 20. 有效的括号.swift in Sources */,
+				00006AE6264D2D6E000D53C8 /* BinaryTree.swift in Sources */,
 				0001C41126296BB60072D785 /* DoubleLinkList.swift in Sources */,
 				FE9FED5E24E2A01E00173EEC /* Heap.swift in Sources */,
 				004E187726314DBC0093563C /* 141. 环形链表.swift in Sources */,
