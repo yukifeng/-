@@ -18,7 +18,17 @@ class SecViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        avl()
+        rbTree()
+    }
+    
+    private func rbTree() {
+        let rb = RBTree<Int>()
+        let arr = [52, 33, 29, 73, 37, 55, 3, 36, 49, 82, 23, 10, 4, 92, 95]
+        for i in 0..<arr.count {
+            rb.add(element: arr[i])
+            print(rb)
+            print("======================")
+        }
     }
     
     private func avl() {

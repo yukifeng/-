@@ -26,10 +26,19 @@
 		004E188C26325D4C0093563C /* 150. 逆波兰表达式求值.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004E188B26325D4C0093563C /* 150. 逆波兰表达式求值.swift */; };
 		004E189726327CD20093563C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004E189626327CD20093563C /* Queue.swift */; };
 		00841767264E5FE6001EDB99 /* AVLTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00841766264E5FE6001EDB99 /* AVLTree.swift */; };
+		0084176C26539880001EDB99 /* 226. 翻转二叉树.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084176B2653987F001EDB99 /* 226. 翻转二叉树.swift */; };
 		00B11B13262E731400F7CC5D /* SingleCircleLinkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B11B12262E731400F7CC5D /* SingleCircleLinkList.swift */; };
 		00B11B1E262E73EF00F7CC5D /* Node.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B11B1D262E73EF00F7CC5D /* Node.swift */; };
 		00B11B7E26301B3200F7CC5D /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B11B7D26301B3200F7CC5D /* Stack.swift */; };
 		00B11B8226301C7C00F7CC5D /* DoubleCircleLinkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B11B8126301C7C00F7CC5D /* DoubleCircleLinkList.swift */; };
+		00C358C02657916400C5FAF5 /* RBTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C358BF2657916400C5FAF5 /* RBTree.swift */; };
+		00C358C42657AFA700C5FAF5 /* BBST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C358C32657AFA700C5FAF5 /* BBST.swift */; };
+		00EEE3B7265609FE0026147E /* 110. 平衡二叉树.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EEE3B6265609FE0026147E /* 110. 平衡二叉树.swift */; };
+		00EEE3BB265613090026147E /* 144. 二叉树的前序遍历.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EEE3BA265613090026147E /* 144. 二叉树的前序遍历.swift */; };
+		00EEE3BF2656178C0026147E /* 102. 二叉树的层序遍历.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EEE3BE2656178C0026147E /* 102. 二叉树的层序遍历.swift */; };
+		00EEE3C326563BAE0026147E /* 530. 二叉搜索树的最小绝对差.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EEE3C226563BAE0026147E /* 530. 二叉搜索树的最小绝对差.swift */; };
+		00EEE3C7265642440026147E /* 98. 验证二叉搜索树.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EEE3C6265642440026147E /* 98. 验证二叉搜索树.swift */; };
+		00EEE3CB265654E50026147E /* 230. 二叉搜索树中第K小的元素.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EEE3CA265654E50026147E /* 230. 二叉搜索树中第K小的元素.swift */; };
 		FE9FED3C24E2A00100173EEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9FED3B24E2A00100173EEC /* AppDelegate.swift */; };
 		FE9FED3E24E2A00100173EEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9FED3D24E2A00100173EEC /* SceneDelegate.swift */; };
 		FE9FED4024E2A00100173EEC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9FED3F24E2A00100173EEC /* ViewController.swift */; };
@@ -71,10 +80,19 @@
 		004E188B26325D4C0093563C /* 150. 逆波兰表达式求值.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "150. 逆波兰表达式求值.swift"; sourceTree = "<group>"; };
 		004E189626327CD20093563C /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
 		00841766264E5FE6001EDB99 /* AVLTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVLTree.swift; sourceTree = "<group>"; };
+		0084176B2653987F001EDB99 /* 226. 翻转二叉树.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "226. 翻转二叉树.swift"; sourceTree = "<group>"; };
 		00B11B12262E731400F7CC5D /* SingleCircleLinkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCircleLinkList.swift; sourceTree = "<group>"; };
 		00B11B1D262E73EF00F7CC5D /* Node.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Node.swift; sourceTree = "<group>"; };
 		00B11B7D26301B3200F7CC5D /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		00B11B8126301C7C00F7CC5D /* DoubleCircleLinkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleCircleLinkList.swift; sourceTree = "<group>"; };
+		00C358BF2657916400C5FAF5 /* RBTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RBTree.swift; sourceTree = "<group>"; };
+		00C358C32657AFA700C5FAF5 /* BBST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BBST.swift; sourceTree = "<group>"; };
+		00EEE3B6265609FE0026147E /* 110. 平衡二叉树.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "110. 平衡二叉树.swift"; sourceTree = "<group>"; };
+		00EEE3BA265613090026147E /* 144. 二叉树的前序遍历.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "144. 二叉树的前序遍历.swift"; sourceTree = "<group>"; };
+		00EEE3BE2656178C0026147E /* 102. 二叉树的层序遍历.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "102. 二叉树的层序遍历.swift"; sourceTree = "<group>"; };
+		00EEE3C226563BAE0026147E /* 530. 二叉搜索树的最小绝对差.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "530. 二叉搜索树的最小绝对差.swift"; sourceTree = "<group>"; };
+		00EEE3C6265642440026147E /* 98. 验证二叉搜索树.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "98. 验证二叉搜索树.swift"; sourceTree = "<group>"; };
+		00EEE3CA265654E50026147E /* 230. 二叉搜索树中第K小的元素.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "230. 二叉搜索树中第K小的元素.swift"; sourceTree = "<group>"; };
 		FE9FED3824E2A00100173EEC /* suanfaStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = suanfaStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE9FED3B24E2A00100173EEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FE9FED3D24E2A00100173EEC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -113,6 +131,8 @@
 				00006AA1264910B7000D53C8 /* BinarySearchTree.swift */,
 				00006AE5264D2D6E000D53C8 /* BinaryTree.swift */,
 				00841766264E5FE6001EDB99 /* AVLTree.swift */,
+				00C358BF2657916400C5FAF5 /* RBTree.swift */,
+				00C358C32657AFA700C5FAF5 /* BBST.swift */,
 			);
 			path = "树";
 			sourceTree = "<group>";
@@ -120,6 +140,7 @@
 		004E186426314D6B0093563C /* leetcode */ = {
 			isa = PBXGroup;
 			children = (
+				0084176A26539865001EDB99 /* 二叉树 */,
 				004E188026314DD30093563C /* 栈 */,
 				004E186B26314DBC0093563C /* 链表 */,
 			);
@@ -158,6 +179,20 @@
 				004E189626327CD20093563C /* Queue.swift */,
 			);
 			path = "队列";
+			sourceTree = "<group>";
+		};
+		0084176A26539865001EDB99 /* 二叉树 */ = {
+			isa = PBXGroup;
+			children = (
+				0084176B2653987F001EDB99 /* 226. 翻转二叉树.swift */,
+				00EEE3B6265609FE0026147E /* 110. 平衡二叉树.swift */,
+				00EEE3BA265613090026147E /* 144. 二叉树的前序遍历.swift */,
+				00EEE3BE2656178C0026147E /* 102. 二叉树的层序遍历.swift */,
+				00EEE3C226563BAE0026147E /* 530. 二叉搜索树的最小绝对差.swift */,
+				00EEE3C6265642440026147E /* 98. 验证二叉搜索树.swift */,
+				00EEE3CA265654E50026147E /* 230. 二叉搜索树中第K小的元素.swift */,
+			);
+			path = "二叉树";
 			sourceTree = "<group>";
 		};
 		00B11B16262E732100F7CC5D /* lianbiao */ = {
@@ -331,30 +366,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00EEE3BF2656178C0026147E /* 102. 二叉树的层序遍历.swift in Sources */,
 				00841767264E5FE6001EDB99 /* AVLTree.swift in Sources */,
 				004E187526314DBC0093563C /* 2. 两数相加.swift in Sources */,
+				00EEE3B7265609FE0026147E /* 110. 平衡二叉树.swift in Sources */,
+				00EEE3C7265642440026147E /* 98. 验证二叉搜索树.swift in Sources */,
 				00B11B8226301C7C00F7CC5D /* DoubleCircleLinkList.swift in Sources */,
 				004E187A26314DBC0093563C /* 237删除链表中给定的节点.swift in Sources */,
 				004E187626314DBC0093563C /* 206反转链表.swift in Sources */,
 				FE9FED4024E2A00100173EEC /* ViewController.swift in Sources */,
 				FE9FED3C24E2A00100173EEC /* AppDelegate.swift in Sources */,
+				00C358C02657916400C5FAF5 /* RBTree.swift in Sources */,
 				00104776262D31FB001E6465 /* SecViewController.swift in Sources */,
 				004E187D26314DBC0093563C /* 203. 移除链表元素.swift in Sources */,
+				0084176C26539880001EDB99 /* 226. 翻转二叉树.swift in Sources */,
 				004E187B26314DBC0093563C /* 83. 删除排序链表中的重复元素.swift in Sources */,
 				00006AA2264910B7000D53C8 /* BinarySearchTree.swift in Sources */,
 				004E188826315B480093563C /* 856. 括号的分数.swift in Sources */,
 				00B11B1E262E73EF00F7CC5D /* Node.swift in Sources */,
 				004E187C26314DBC0093563C /* ListNode.swift in Sources */,
 				004E188C26325D4C0093563C /* 150. 逆波兰表达式求值.swift in Sources */,
+				00EEE3C326563BAE0026147E /* 530. 二叉搜索树的最小绝对差.swift in Sources */,
 				004E187926314DBC0093563C /* 876. 链表的中间结点.swift in Sources */,
+				00EEE3BB265613090026147E /* 144. 二叉树的前序遍历.swift in Sources */,
 				00B11B13262E731400F7CC5D /* SingleCircleLinkList.swift in Sources */,
 				0001C32E2626CC900072D785 /* LinkList.swift in Sources */,
 				00B11B7E26301B3200F7CC5D /* Stack.swift in Sources */,
 				004E187826314DBC0093563C /* 剑指 Offer 06. 从尾到头打印链表.swift in Sources */,
 				FE9FED3E24E2A00100173EEC /* SceneDelegate.swift in Sources */,
+				00EEE3CB265654E50026147E /* 230. 二叉搜索树中第K小的元素.swift in Sources */,
 				004E189726327CD20093563C /* Queue.swift in Sources */,
 				004E188226314DEE0093563C /* 20. 有效的括号.swift in Sources */,
 				00006AE6264D2D6E000D53C8 /* BinaryTree.swift in Sources */,
+				00C358C42657AFA700C5FAF5 /* BBST.swift in Sources */,
 				0001C41126296BB60072D785 /* DoubleLinkList.swift in Sources */,
 				FE9FED5E24E2A01E00173EEC /* Heap.swift in Sources */,
 				004E187726314DBC0093563C /* 141. 环形链表.swift in Sources */,

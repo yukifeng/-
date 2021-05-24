@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AVLTree<E: Comparable>: BinarySearchTree<E> {
+class AVLTree<E: Comparable>: BBST<E> {
     
     override func createNode(_ element: E, parent: TreeNode<E>?) -> TreeNode<E> {
         return AVLNode(element: element, parent: parent)
@@ -67,42 +67,8 @@ class AVLTree<E: Comparable>: BinarySearchTree<E> {
         }
     }
     
-    /// 左旋转
-    /// - Parameter node: <#node description#>
-    private func rorateLeft(_ grand: TreeNode<E>) {
-        let parent = grand.right!
-        let child = parent.left
-        grand.right = child
-        parent.left = grand
-        
-        afterRorate(grand, parent: parent, child: child)
-    }
-    
-    /// 右旋转
-    /// - Parameter node: <#node description#>
-    private func rorateRight(_ grand: TreeNode<E>) {
-        let parent = grand.left!
-        let child = parent.right
-        grand.left = child
-        parent.right = grand
-        
-        afterRorate(grand, parent: parent, child: child)
-    }
-    
-    private func afterRorate(_ grand: TreeNode<E>, parent: TreeNode<E>,child: TreeNode<E>?) {
-        // 让parent成为这棵树的根节点
-        if grand.isLeftChild() {
-            grand.parent?.left = parent
-        }else if grand.isRightChild() {
-            grand.parent?.right = parent
-        }else { // grand没有父节点，根节点设置成parent
-            rootNode = parent
-        }
-        
-        child?.parent = grand
-        parent.parent = grand.parent
-        grand.parent = parent
-        
+    override func afterRorate(_ grand: TreeNode<E>, parent: TreeNode<E>,child: TreeNode<E>?) {
+        super.afterRorate(grand, parent: parent, child: child)
         updateHeight(grand)
         updateHeight(parent)
     }

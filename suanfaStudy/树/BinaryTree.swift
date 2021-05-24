@@ -235,6 +235,20 @@ class TreeNode<E>: NSObject {
         self.parent = parent
     }
     
+    /// 返回兄弟节点
+    /// - Returns: <#description#>
+    func sibling() -> TreeNode<E>? {
+        if parent == nil {
+            return nil
+        }
+        
+        if isLeftChild() {
+            return parent!.right
+        }else {
+            return parent!.left
+        }
+    }
+    
     /// 是否是叶子节点
     func isLeafNode() -> Bool {
         return left == nil && right == nil
