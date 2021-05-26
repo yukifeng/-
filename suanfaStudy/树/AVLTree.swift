@@ -31,7 +31,11 @@ class AVLTree<E: Comparable>: BBST<E> {
         }
     }
     
-    override func afterRemove(_ node: TreeNode<E>) {
+    /// <#Description#>
+    /// - Parameters:
+    ///   - node: <#node description#>
+    ///   - replacement: 红黑树使用，AVL树不用
+    override func afterRemove(_ node: TreeNode<E>,replacement: TreeNode<E>?) {
         var parent = node.parent
         while parent != nil {
             if isBlance(parent!) {

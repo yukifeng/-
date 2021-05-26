@@ -81,27 +81,30 @@ class BinarySearchTree<E: Comparable>: BinaryTree<E> {
                     node.parent?.right = nil
                 }
             }
+            afterRemove(node, replacement: nil)
         }else if node.hasTwoChild() { // 度为2的节点
             let succNode = successor(node)
             node.element = succNode!.element // 度为2一定有前驱
             remove(node: succNode!)
         }else { // 度为1的节点
+            let replacement = node.left != nil ? node.left : node.right
             if node.parent == nil { // 度为1且是node是根节点
                 if node.left != nil {
-                    rootNode = node.left
+                    rootNode = replacement
                     node.left?.parent = nil
                 }else {
-                    rootNode = node.right
+                    rootNode = replacement
                     node.right?.parent = nil
                 }
-            }
-            if node.left != nil { // 左子节点不为空
+                afterRemove(node, replacement: replacement)
+            }else if node.left != nil { // 左子节点不为空
                 node.left!.parent = node.parent
                 if node.parent?.left == node {
                     node.parent!.left = node.left
                 }else {
                     node.parent?.right = node.left
                 }
+                afterRemove(node, replacement: replacement)
             }else { // 右子节点不为空
                 node.right!.parent = node.parent
                 if node.parent?.left == node {
@@ -109,15 +112,15 @@ class BinarySearchTree<E: Comparable>: BinaryTree<E> {
                 }else {
                     node.parent?.right = node.right
                 }
+                afterRemove(node, replacement: replacement)
             }
         }
-        afterRemove(node)
         size -= 1
     }
     
     /// 删除节点后的逻辑处理
     /// - Parameter node: <#node description#>
-    func afterRemove(_ node: TreeNode<E>) {}
+    func afterRemove(_ node: TreeNode<E>,replacement: TreeNode<E>?) {}
     
     /// 添加节点后的逻辑处理
     /// - Parameter node: <#node description#>

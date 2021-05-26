@@ -23,11 +23,17 @@ class SecViewController: UIViewController {
     
     private func rbTree() {
         let rb = RBTree<Int>()
-        let arr = [52, 33, 29, 73, 37, 55, 3, 36, 49, 82, 23, 10, 4, 92, 95]
+//        let arr = [52, 33, 29, 73, 37, 55, 3, 36, 49, 82, 23, 10, 4, 92, 95]
+        let arr = [16, 88, 46, 70, 97, 73, 29, 30, 13, 91, 2, 6, 61, 40, 100]
         for i in 0..<arr.count {
             rb.add(element: arr[i])
+        }
+        print(rb)
+        
+        for i in 0..<arr.count {
+            rb.remove(element: arr[i])
+            print("删除\(arr[i])======================================")
             print(rb)
-            print("======================")
         }
     }
     
