@@ -18,7 +18,44 @@ class SecViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        rbTree()
+        
+        treeMap()
+    }
+    
+    private func treeMap() {
+        let treemap = TreeMap<String,String>()
+        treemap.put("zhang", value: "san")
+        treemap.put("wang", value: "wu")
+        treemap.put("li", value: "4")
+        treemap.put("zhao", value: "6")
+        
+        print(treemap.get("zhang"))
+        print(treemap.get("li"))
+        print(treemap.get("wang"))
+        print(treemap.get("zhao"))
+        print("size:\(treemap.size)")
+        
+        treemap.traversal { (node) in
+            print("key:\(node.key)_value:\(node.value)")
+        }
+        
+        treemap.put("li", value: "10")
+        print(treemap.get("li"))
+        
+        print("containsValue4:\(treemap.containsValue("4"))")
+        print("containsValue10:\(treemap.containsValue("10"))")
+        
+        print(treemap.containsKey("li"))
+        treemap.remove("li")
+        print("size:\(treemap.size)")
+        print(treemap.containsKey("li"))
+        
+        
+        print(treemap.isEmpty())
+        treemap.clear()
+        print(treemap.isEmpty())
+        
+        
     }
     
     private func rbTree() {

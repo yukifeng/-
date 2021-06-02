@@ -26,6 +26,7 @@ class BinarySearchTree<E: Comparable>: BinaryTree<E> {
         if rootNode == nil { // 添加第一个节点
             rootNode = createNode(element, parent: nil)
             afterAdd(rootNode!)
+            size += 1
             return
         }
         // 添加之后的节点
@@ -43,6 +44,7 @@ class BinarySearchTree<E: Comparable>: BinaryTree<E> {
                 currentNode = parent?.left
             case .orderedSame: // ==
                 parent?.element = element
+                return
             }
         }
         
