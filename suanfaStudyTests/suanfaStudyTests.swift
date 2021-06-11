@@ -25,6 +25,41 @@ class suanfaStudyTests: XCTestCase {
         // Use XCTAssert and related functions to verify your tests produce the correct results.
     }
     
+    func testHashMap() throws {
+        let hashmap = HashMap<String,Any>()
+        for i in 0..<3000 {
+            hashmap.put("\(i)", value: i)
+        }
+        
+        hashmap.put("20", value: 222222)
+        hashmap.put("30", value: 23094)
+        
+        for i in 0..<3000 {
+            if i == 20 {
+                XCTAssert(hashmap.get("20") as! Int == 222222, "error")
+            }else if i == 30 {
+                XCTAssert(hashmap.get("30") as! Int == 23094, "error")
+            }else {
+                XCTAssert(hashmap.get("\(i)") as! Int == i, "error")
+            }
+        }
+
+        for i in 0..<1500 {
+            hashmap.remove("\(i)")
+        }
+        
+        for i in 0..<3000 {
+            if i < 1500 {
+                XCTAssert(hashmap.get("\(i)") == nil, "error")
+            }else {
+                XCTAssert(hashmap.get("\(i)") as! Int == i, "error")
+            }
+        }
+        
+
+        
+    }
+    
     func testAVLTree() throws {
         let avlTree = AVLTree<Int>()
 

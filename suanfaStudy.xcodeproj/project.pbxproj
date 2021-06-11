@@ -25,6 +25,8 @@
 		004E188826315B480093563C /* 856. 括号的分数.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004E188726315B480093563C /* 856. 括号的分数.swift */; };
 		004E188C26325D4C0093563C /* 150. 逆波兰表达式求值.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004E188B26325D4C0093563C /* 150. 逆波兰表达式求值.swift */; };
 		004E189726327CD20093563C /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 004E189626327CD20093563C /* Queue.swift */; };
+		0058EAB42667878900781DB4 /* 349. 两个数组的交集.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058EAB32667878900781DB4 /* 349. 两个数组的交集.swift */; };
+		0058EAB82668724000781DB4 /* HashMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0058EAB72668724000781DB4 /* HashMap.swift */; };
 		00841767264E5FE6001EDB99 /* AVLTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00841766264E5FE6001EDB99 /* AVLTree.swift */; };
 		0084176C26539880001EDB99 /* 226. 翻转二叉树.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0084176B2653987F001EDB99 /* 226. 翻转二叉树.swift */; };
 		00B11B13262E731400F7CC5D /* SingleCircleLinkList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B11B12262E731400F7CC5D /* SingleCircleLinkList.swift */; };
@@ -80,6 +82,8 @@
 		004E188726315B480093563C /* 856. 括号的分数.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "856. 括号的分数.swift"; sourceTree = "<group>"; };
 		004E188B26325D4C0093563C /* 150. 逆波兰表达式求值.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "150. 逆波兰表达式求值.swift"; sourceTree = "<group>"; };
 		004E189626327CD20093563C /* Queue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queue.swift; sourceTree = "<group>"; };
+		0058EAB32667878900781DB4 /* 349. 两个数组的交集.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "349. 两个数组的交集.swift"; sourceTree = "<group>"; };
+		0058EAB72668724000781DB4 /* HashMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashMap.swift; sourceTree = "<group>"; };
 		00841766264E5FE6001EDB99 /* AVLTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVLTree.swift; sourceTree = "<group>"; };
 		0084176B2653987F001EDB99 /* 226. 翻转二叉树.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "226. 翻转二叉树.swift"; sourceTree = "<group>"; };
 		00B11B12262E731400F7CC5D /* SingleCircleLinkList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleCircleLinkList.swift; sourceTree = "<group>"; };
@@ -142,6 +146,7 @@
 		004E186426314D6B0093563C /* leetcode */ = {
 			isa = PBXGroup;
 			children = (
+				0058EAB22667878900781DB4 /* 集合 */,
 				0084176A26539865001EDB99 /* 二叉树 */,
 				004E188026314DD30093563C /* 栈 */,
 				004E186B26314DBC0093563C /* 链表 */,
@@ -183,6 +188,14 @@
 			path = "队列";
 			sourceTree = "<group>";
 		};
+		0058EAB22667878900781DB4 /* 集合 */ = {
+			isa = PBXGroup;
+			children = (
+				0058EAB32667878900781DB4 /* 349. 两个数组的交集.swift */,
+			);
+			path = "集合";
+			sourceTree = "<group>";
+		};
 		0084176A26539865001EDB99 /* 二叉树 */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +234,7 @@
 			isa = PBXGroup;
 			children = (
 				00C358D726661EBB00C5FAF5 /* TreeMap.swift */,
+				0058EAB72668724000781DB4 /* HashMap.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -379,6 +393,7 @@
 			files = (
 				00EEE3BF2656178C0026147E /* 102. 二叉树的层序遍历.swift in Sources */,
 				00C358D826661EBB00C5FAF5 /* TreeMap.swift in Sources */,
+				0058EAB82668724000781DB4 /* HashMap.swift in Sources */,
 				00841767264E5FE6001EDB99 /* AVLTree.swift in Sources */,
 				004E187526314DBC0093563C /* 2. 两数相加.swift in Sources */,
 				00EEE3B7265609FE0026147E /* 110. 平衡二叉树.swift in Sources */,
@@ -392,6 +407,7 @@
 				00104776262D31FB001E6465 /* SecViewController.swift in Sources */,
 				004E187D26314DBC0093563C /* 203. 移除链表元素.swift in Sources */,
 				0084176C26539880001EDB99 /* 226. 翻转二叉树.swift in Sources */,
+				0058EAB42667878900781DB4 /* 349. 两个数组的交集.swift in Sources */,
 				004E187B26314DBC0093563C /* 83. 删除排序链表中的重复元素.swift in Sources */,
 				00006AA2264910B7000D53C8 /* BinarySearchTree.swift in Sources */,
 				004E188826315B480093563C /* 856. 括号的分数.swift in Sources */,

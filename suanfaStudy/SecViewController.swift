@@ -18,12 +18,38 @@ class SecViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        hashMap()
+    }
+    
+    private func hashMap() {
+        let hashmap = HashMap<String,Any>()
+        for i in 0..<30 {
+            hashmap.put("\(i)", value: i)
+        }
         
-        treeMap()
+        hashmap.put("20", value: 222222)
+        
+        
+        print(hashmap)
+
+        for i in 0..<15 {
+            hashmap.remove("\(i)")
+        }
+        for i in 0..<30 {
+            print("key:\(i)_value:\(hashmap.get("\(i)"))")
+        }
+        print("=============================")
+        for i in 15..<30 {
+            hashmap.remove("\(i)")
+        }
+
+        for i in 15..<30 {
+            print("key:\(i)_value:\(hashmap.get("\(i)"))")
+        }
     }
     
     private func treeMap() {
-        let treemap = TreeMap<String,String>()
+        let treemap = TreeMap<String, String>()
         treemap.put("zhang", value: "san")
         treemap.put("wang", value: "wu")
         treemap.put("li", value: "4")
