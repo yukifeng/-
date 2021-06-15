@@ -26,7 +26,7 @@ class suanfaStudyTests: XCTestCase {
     }
     
     func testHashMap() throws {
-        let hashmap = HashMap<String,Any>()
+        let hashmap = HashMap()
         for i in 0..<3000 {
             hashmap.put("\(i)", value: i)
         }

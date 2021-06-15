@@ -18,17 +18,28 @@ class SecViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        hashMap()
+        hashMap2()
+    }
+    
+    private func hashMap2() {
+        let hashmap = HashMap()
+        hashmap.put(Person(name: "zhang", age: 10), value: "10")
+        hashmap.put(Person(name: "wang", age: 11), value: "11")
+        hashmap.put("li", value: "12")
+        hashmap.put(Person(name: "zhang", age: 10), value: "15")
+        
+        print(hashmap.get(Person(name: "zhang", age: 10)))
+        print(hashmap.get(Person(name: "wang", age: 11)))
+        print(hashmap.get("li"))
     }
     
     private func hashMap() {
-        let hashmap = HashMap<String,Any>()
+        let hashmap = HashMap()
         for i in 0..<30 {
             hashmap.put("\(i)", value: i)
         }
         
         hashmap.put("20", value: 222222)
-        
         
         print(hashmap)
 
@@ -315,6 +326,20 @@ class SecViewController: UIViewController {
 }
 
 
-class Person {
+class Person: Hashable {
+    static func == (lhs: Person, rhs: Person) -> Bool {
+        return lhs.age == rhs.age && lhs.name == rhs.name
+    }
+    
+    var hashValue: Int {
+        return age / 10
+    }
+    
     var age = 0
+    var name = ""
+    
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
 }

@@ -8,10 +8,10 @@
 
 import Foundation
 
-class HashMap<K: Hashable, V>: NSObject {
-    typealias Visitor = (HashMapNode<K,V>) -> ()
+class HashMap: NSObject {
+    typealias Visitor = (HashMapNode) -> ()
     /// 存放数据的表
-    var table = [HashMapNode<K, V>?]()
+    var table = [HashMapNode?]()
     /// 容量
     var capacity = 1 << 4
     /// 扩容因子
@@ -27,7 +27,7 @@ class HashMap<K: Hashable, V>: NSObject {
         return str
     }
     
-    private func printMap(node:HashMapNode<K,V>?, str: inout String, prefix: String) {
+    private func printMap(node:HashMapNode?, str: inout String, prefix: String) {
         if node != nil {
             str += "\(prefix)key:\(node!.key)---value:\(node!.value)\n"
             if node!.left != nil {
@@ -61,12 +61,12 @@ class HashMap<K: Hashable, V>: NSObject {
     
     /// 前序遍历
     /// - Parameter visitor: <#visitor description#>
-    func preorderTravelsal(rootNode:HashMapNode<K,V>, visitor: (HashMapNode<K,V>)->()) {
+    func preorderTravelsal(rootNode:HashMapNode, visitor: (HashMapNode)->()) {
         
         preorderTravelsal(rootNode, visitor: visitor)
     }
     
-    private func preorderTravelsal(_ node: HashMapNode<K,V>?, visitor: (HashMapNode<K,V>)->()) {
+    private func preorderTravelsal(_ node: HashMapNode?, visitor: (HashMapNode)->()) {
         if node == nil {
             return
         }
@@ -81,7 +81,7 @@ class HashMap<K: Hashable, V>: NSObject {
     private func resize() {
         if Double(size) / Double(table.count) <= loadFactor { return }
         
-        var oldTable = [HashMapNode<K,V>?]()
+        var oldTable = [HashMapNode?]()
         
         for i in 0..<table.count {
             oldTable.append(table[i])
@@ -92,7 +92,7 @@ class HashMap<K: Hashable, V>: NSObject {
             table.append(nil)
         }
         
-        let queue = Queue<HashMapNode<K,V>>()
+        let queue = Queue<HashMapNode>()
         for i in 0..<oldTable.count {
             if oldTable[i] == nil { continue }
             queue.offer(oldTable[i]!)
@@ -113,7 +113,7 @@ class HashMap<K: Hashable, V>: NSObject {
 
     }
     
-    private func moveNode(_ newNode: HashMapNode<K,V>) {
+    private func moveNode(_ newNode: HashMapNode) {
         newNode.left = nil
         newNode.right = nil
         newNode.parent = nil
@@ -126,20 +126,20 @@ class HashMap<K: Hashable, V>: NSObject {
     /// 根据key生成对应的索引（在桶数组中的位置）
     /// - Parameter key: <#key description#>
     /// - Returns: <#description#>
-    private func getIndex(key: K) -> Int {
+    private func getIndex(key: AnyHashable) -> Int {
         return hash(key: key) & (table.count - 1)
     }
     
-    private func getIndex(node: HashMapNode<K,V>) -> Int {
+    private func getIndex(node: HashMapNode) -> Int {
         return getIndex(key: node.key)
     }
     
-    private func hash(key: K?) -> Int {
+    private func hash(key: AnyHashable?) -> Int {
         let hash = key == nil ? 0 : key.hashValue
         return hash ^ (hash >>> 16)
     }
     
-    func put(_ key: K, value: V) {
+    func put(_ key: AnyHashable, value: Any) {
         resize()
         
         let index = getIndex(key: key)
@@ -215,19 +215,19 @@ class HashMap<K: Hashable, V>: NSObject {
         return random > 4 ? .orderedAscending : .orderedDescending
     }
     
-    func search(_ key: K) -> HashMapNode<K, V>? {
+    func search(_ key: AnyHashable) -> HashMapNode? {
         let root = table[getIndex(key: key)]
         return root == nil ? nil : getNode(root, key: key)
     }
     
-    func get(_ key: K) -> V? {
+    func get(_ key: AnyHashable) -> Any? {
         let root = table[getIndex(key: key)]
         return get(node: root, key: key)
     }
     
-    private func getNode(_ node: HashMapNode<K,V>?, key: K) -> HashMapNode<K,V>? {
+    private func getNode(_ node: HashMapNode?, key: AnyHashable) -> HashMapNode? {
         var result: ComparisonResult = .orderedSame
-        var currentNode: HashMapNode<K,V>? = node
+        var currentNode: HashMapNode? = node
         let h1 = hash(key: key)
         
         while currentNode != nil {
@@ -246,8 +246,6 @@ class HashMap<K: Hashable, V>: NSObject {
                 }else if currentNode?.right != nil && currentNode?.right?.key == key {
                     result = .orderedSame
                     currentNode = currentNode?.right
-                }else {
-                    result = getRandom()
                 }
             }
             if result == .orderedAscending {
@@ -261,11 +259,11 @@ class HashMap<K: Hashable, V>: NSObject {
         return nil
     }
     
-    private func get(node: HashMapNode<K,V>?, key: K) -> V? {
+    private func get(node: HashMapNode?, key: AnyHashable) -> Any? {
         return getNode(node, key: key)?.value
     }
     
-    func remove(_ key: K) {
+    func remove(_ key: AnyHashable) {
         let node = search(key)
         if node == nil {
             print("未找到元素\(key)")
@@ -274,7 +272,7 @@ class HashMap<K: Hashable, V>: NSObject {
         remove(node: node!)
     }
     
-    func containsKey(_ key: K) -> Bool {
+    func containsKey(_ key: AnyHashable) -> Bool {
         return search(key) != nil
     }
     
@@ -283,7 +281,7 @@ class HashMap<K: Hashable, V>: NSObject {
     
     /// 左旋转
     /// - Parameter node: <#node description#>
-    func rorateLeft(_ grand: HashMapNode<K,V>) {
+    func rorateLeft(_ grand: HashMapNode) {
         let parent = grand.right!
         let child = parent.left
         grand.right = child
@@ -294,7 +292,7 @@ class HashMap<K: Hashable, V>: NSObject {
     
     /// 右旋转
     /// - Parameter node: <#node description#>
-    func rorateRight(_ grand: HashMapNode<K,V>) {
+    func rorateRight(_ grand: HashMapNode) {
         let parent = grand.left!
         let child = parent.right
         grand.left = child
@@ -303,7 +301,7 @@ class HashMap<K: Hashable, V>: NSObject {
         afterRorate(grand, parent: parent, child: child)
     }
     
-    func afterRorate(_ grand: HashMapNode<K,V>, parent: HashMapNode<K,V>,child: HashMapNode<K,V>?) {
+    func afterRorate(_ grand: HashMapNode, parent: HashMapNode,child: HashMapNode?) {
         // 让parent成为这棵树的根节点
         if grand.isLeftChild() {
             grand.parent?.left = parent
@@ -320,7 +318,7 @@ class HashMap<K: Hashable, V>: NSObject {
     /// 返回该节点的前驱节点
     /// - Parameter node: <#node description#>
     /// - Returns: <#description#>
-    func predecessor(_ node: HashMapNode<K,V>) -> HashMapNode<K,V>? {
+    func predecessor(_ node: HashMapNode) -> HashMapNode? {
         var child = node.left
         if child != nil { // node有左子节点
             while child?.right != nil { // node.left.right.right...
@@ -342,7 +340,7 @@ class HashMap<K: Hashable, V>: NSObject {
     /// 返回该节点的后继节点
     /// - Parameter node: <#node description#>
     /// - Returns: <#description#>
-    func successor(_ node: HashMapNode<K, V>) -> HashMapNode<K, V>? {
+    func successor(_ node: HashMapNode) -> HashMapNode? {
         var child = node.right
         if child != nil { // node有右子节点
             while child?.left != nil { // node.right.left.left...
@@ -361,7 +359,7 @@ class HashMap<K: Hashable, V>: NSObject {
     }
     
     
-    private func remove(node: HashMapNode<K, V>) {
+    private func remove(node: HashMapNode) {
         if node.isLeafNode() { // 是叶子节点，直接删除
             if node.parent == nil { // node是根节点且只有一个根节点
                 table[getIndex(key: node.key)] = nil
@@ -409,13 +407,13 @@ class HashMap<K: Hashable, V>: NSObject {
         }
         size -= 1
     }
-    func createNode(_ key: K, value: V, parent: HashMapNode<K, V>?) -> HashMapNode<K, V> {
+    func createNode(_ key: AnyHashable, value: Any, parent: HashMapNode?) -> HashMapNode {
         return HashMapNode(key: key, value: value, parent: parent)
     }
     
     /// 添加节点后的操作
     /// - Parameter node: 新创建的节点
-    func fixAfterPut(_ node: HashMapNode<K, V>) {
+    func fixAfterPut(_ node: HashMapNode) {
         if node.parent == nil { // node是根节点
             let _ = setColorToBlack(node)
             return
@@ -462,7 +460,7 @@ class HashMap<K: Hashable, V>: NSObject {
     
     /// 删除节点后的逻辑处理
     /// - Parameter node: <#node description#>
-    func afterRemove(_ node: HashMapNode<K, V>, replacement: HashMapNode<K, V>?) {
+    func afterRemove(_ node: HashMapNode, replacement: HashMapNode?) {
         if isRed(node) { // 删除的节点是红色，无事发生
             return
         }
@@ -547,14 +545,14 @@ class HashMap<K: Hashable, V>: NSObject {
     /// 将节点染成黑色
     /// - Parameter node: <#node description#>
     /// - Returns: <#description#>
-    func setColorToBlack(_ node: HashMapNode<K, V>?) -> HashMapNode<K, V>? {
+    func setColorToBlack(_ node: HashMapNode?) -> HashMapNode? {
         return setNodeTo(.Black, node: node)
     }
     
     /// 将节点染成红色
     /// - Parameter node: <#node description#>
     /// - Returns: <#description#>
-    func setColorToRed(_ node: HashMapNode<K, V>?) -> HashMapNode<K, V>? {
+    func setColorToRed(_ node: HashMapNode?) -> HashMapNode? {
         return setNodeTo(.Red, node: node)
     }
     
@@ -563,7 +561,7 @@ class HashMap<K: Hashable, V>: NSObject {
     ///   - color: <#color description#>
     ///   - node: <#node description#>
     /// - Returns: <#description#>
-    func setNodeTo(_ color: RBNodeColor, node: HashMapNode<K, V>?) -> HashMapNode<K, V>? {
+    func setNodeTo(_ color: RBNodeColor, node: HashMapNode?) -> HashMapNode? {
         if node == nil {
             return nil
         }
@@ -574,15 +572,15 @@ class HashMap<K: Hashable, V>: NSObject {
     /// 获取节点的颜色
     /// - Parameter node: <#node description#>
     /// - Returns: <#description#>
-    func colorOf(_ node: HashMapNode<K, V>?) -> RBNodeColor {
-//        let node = node as? RBNode<K, V>
+    func colorOf(_ node: HashMapNode?) -> RBNodeColor {
+//        let node = node as? RBNode
         return node == nil ? .Black : node!.color
     }
     
     /// 节点是否时黑色
     /// - Parameter node: <#node description#>
     /// - Returns: <#description#>
-    func isBlack(_ node: HashMapNode<K, V>?) -> Bool {
+    func isBlack(_ node: HashMapNode?) -> Bool {
 //        let node = node as? RBNode
         return  node == nil || node?.color == .Black
     }
@@ -590,24 +588,20 @@ class HashMap<K: Hashable, V>: NSObject {
     /// 节点是否时红色
     /// - Parameter node: <#node description#>
     /// - Returns: <#description#>
-    func isRed(_ node: HashMapNode<K, V>?) -> Bool {
+    func isRed(_ node: HashMapNode?) -> Bool {
         return !isBlack(node)
     }
 }
 
-extension HashMap where K: Comparable {
-   
-}
-
-class HashMapNode<K: Hashable,V>: NSObject {
+class HashMapNode: NSObject {
     var color: RBNodeColor = .Black
-    var key: K
-    var value: V
+    var key: AnyHashable
+    var value: Any
     var left: HashMapNode?
     var right: HashMapNode?
     var parent: HashMapNode?
     
-    init(key: K, value: V, parent: HashMapNode<K, V>?) {
+    init(key: AnyHashable, value: Any, parent: HashMapNode?) {
         self.key = key
         self.value = value
         self.parent = parent
@@ -616,7 +610,7 @@ class HashMapNode<K: Hashable,V>: NSObject {
     
     /// 返回兄弟节点
     /// - Returns: <#description#>
-    func sibling() -> HashMapNode<K, V>? {
+    func sibling() -> HashMapNode? {
         if parent == nil {
             return nil
         }
