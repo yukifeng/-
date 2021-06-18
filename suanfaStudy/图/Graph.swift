@@ -52,4 +52,11 @@ protocol Graph {
     ///   - from: <#from description#>
     ///   - to: <#to description#>
     func removeEdge(from: V, to: V)
+    
+    /// 广度优先搜索
+    func bfs(begin: V, visitor: (V) -> ())
+    
+    /// 深度优先搜索
+    /// - Parameter begin: <#begin description#>
+    func dfs(begin: V, visitor: (V) -> ())
 }

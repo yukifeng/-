@@ -18,7 +18,43 @@ class SecViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        graph()
+        graphDfs()
+    }
+    
+    private func graphbfs() {
+//        undirectedGraph(datas: data1).bfs(begin: "A") { (str) in
+//            print(str as! String)
+//        }
+//        directedGraph(datas: data2).bfs(begin: 0) { (str) in
+//            print(str as! Int)
+//        }
+//        undirectedGraph(datas: data3).bfs(begin: 0) { (str) in
+//            print(str as! Int)
+//        }
+        directedGraph(datas: data4).bfs(begin: 5) { (str) in
+            print(str as! Int)
+        }
+    }
+    
+    private func graphDfs() {
+//        undirectedGraph(datas: data1).dfs(begin: "A") { (str) in
+//            print(str as! String)
+//        }
+//        directedGraph(datas: data2).dfs(begin: 0) { (str) in
+//            print(str as! Int)
+//        }
+//        undirectedGraph(datas: data3).dfs(begin: 0) { (str) in
+//            print(str as! Int)
+//        }
+//        directedGraph(datas: data4).dfs(begin: 5) { (str) in
+//            print(str as! Int)
+//        }
+//        undirectedGraph(datas: data5).dfs(begin: 0) { (str) in
+//            print(str as! Int)
+//        }
+        directedGraph(datas: data6).dfs(begin: "e") { (str) in
+            print(str as! String)
+        }
     }
     
     private func graph() {
@@ -339,6 +375,23 @@ class SecViewController: UIViewController {
         print("+++++++++++")
     }
 
+    
+    private func directedGraph(datas: [[AnyHashable]]) -> ListGraph<AnyHashable,AnyHashable> {
+        let graph = ListGraph<AnyHashable,AnyHashable>()
+        for list in datas {
+            graph.addEdge(from: list[0], to: list[1], weight: list.count > 2 ? list[2] : nil)
+        }
+        return graph
+    }
+    
+    private func undirectedGraph(datas: [[AnyHashable]]) -> ListGraph<AnyHashable,AnyHashable> {
+        let graph = ListGraph<AnyHashable,AnyHashable>()
+        for list in datas {
+            graph.addEdge(from: list[0], to: list[1], weight: list.count > 2 ? list[2] : nil)
+            graph.addEdge(from: list[1], to: list[0], weight: list.count > 2 ? list[2] : nil)
+        }
+        return graph
+    }
 }
 
 

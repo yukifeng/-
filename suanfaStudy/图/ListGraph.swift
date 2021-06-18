@@ -144,6 +144,48 @@ class ListGraph<V: Hashable, E: Equatable>: Graph {
         removeEdge(from: from, to: to, weight: nil)
     }
     
+    func bfs(begin: V, visitor: (V) -> ()) {
+        let beginVertex = vertices[begin]
+        guard beginVertex != nil else { return }
+        var visitedVertex = Set<Vertex<V, E>>() // 记录已经遍历过的节点
+        var array = [Vertex<V, E>]() // 当作队列
+        array.append(beginVertex!) // 入队
+        visitedVertex.insert(beginVertex!)
+        
+        while !array.isEmpty {
+            let head = array[0]
+            array.remove(at: 0) // 出队
+            visitor(head.value!)
+            for edge in head.outEdges {
+                if visitedVertex.contains(edge.to) { continue }
+                array.append(edge.to)
+                visitedVertex.insert(edge.to)
+            }
+        }
+    }
+    
+    func dfs(begin: V, visitor: (V) -> ()) {
+        let beginVertex = vertices[begin]
+        guard beginVertex != nil else { return }
+        var visitedVertex = Set<Vertex<V, E>>() // 记录已经遍历过的节点
+        if beginVertex!.value != nil {
+            visitedVertex.insert(beginVertex!)
+            visitor(beginVertex!.value!)
+        }
+        dfs(begin: beginVertex!, visitor: visitor, visitedVertex: &visitedVertex)
+    }
+    
+    private func dfs(begin: Vertex<V, E>, visitor: (V) -> (), visitedVertex: inout Set<Vertex<V, E>>) {
+        for edge in begin.outEdges {
+            if visitedVertex.contains(edge.to) { continue }
+            visitedVertex.insert(edge.to)
+            if edge.to.value != nil {
+                visitor(edge.to.value!)
+            }
+            dfs(begin: edge.to, visitor: visitor, visitedVertex: &visitedVertex)
+        }
+    }
+    
     private class Vertex<V: Hashable, E: Equatable>: Hashable,CustomStringConvertible {
         
         var value: V?
