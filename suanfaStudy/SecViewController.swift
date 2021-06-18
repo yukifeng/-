@@ -18,7 +18,23 @@ class SecViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        hashMap2()
+        graph()
+    }
+    
+    private func graph() {
+        let graph = ListGraph<String, Int>()
+        graph.addEdge(from: "V1", to: "V0", weight: 9)
+        graph.addEdge(from: "V1", to: "V2", weight: 3)
+        graph.addEdge(from: "V2", to: "V0", weight: 2)
+        graph.addEdge(from: "V2", to: "V3", weight: 5)
+        graph.addEdge(from: "V3", to: "V4", weight: 1)
+        graph.addEdge(from: "V0", to: "V4", weight: 6)
+        graph.addVertex("V3")
+        
+        
+        graph.removeVertex("V1")
+        graph.removeEdge(from: "V3", to: "V4", weight: 1)
+        graph.graphPrint()
     }
     
     private func hashMap2() {
