@@ -253,6 +253,33 @@ class ListGraph<V: Hashable, E: Comparable>: Graph<V, E> {
         return edgeInfos
     }
     
+    private func kruskal() -> Set<EdgeInfo<V, E>> {
+        guard vertices.count > 0 else { return Set() }
+        // 返回结果集合
+        var edgeInfos = Set<EdgeInfo<V, E>>()
+        let unionFind = UnionFindObj<Vertex<V, E>>()
+        var edgeList = [Edge<V, E>]()
+        edges.forEach { (edge) in
+            edgeList.append(edge)
+        }
+        let minHeap = Heap(elements: &edgeList, rule: .SmallTop)
+        vertices.forEach { (key,vertex) in
+            unionFind.makeSet(e: vertex)
+        }
+        
+        while !minHeap.isEmpty() && edgeInfos.count < vertices.count - 1 {
+            let e = minHeap.remove()!
+            let v1 = e.to
+            let v2 = e.from
+            if unionFind.isSame(e1: v1, e2: v2) { continue }
+            unionFind.union(e1: v1, e2: v2)
+            edgeInfos.insert(e.convertToEdgeInfo())
+        }
+        
+        
+        return edgeInfos
+    }
+    
     private class Vertex<V: Hashable, E: Comparable>: Hashable,CustomStringConvertible {
         
         var value: V?

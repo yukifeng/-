@@ -18,10 +18,20 @@ class SecViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mstP()
+        mst2()
     }
     
-    private func mstP() {
+    private func mst2() {
+        let graph = ListGraph<String,Int>()
+        for list in mstData2 {
+            graph.addEdge(from: list[0] as! String, to: list[1] as! String, weight: list[2] as! Int)
+            graph.addEdge(from: list[1] as! String, to: list[0] as! String, weight: list[2] as! Int)
+        }
+        let mst = graph.mst()
+        print(mst)
+    }
+    
+    private func mst1() {
         let graph = ListGraph<Int,Int>()
         for list in mstData1 {
             graph.addEdge(from: list[0], to: list[1], weight: list.count > 2 ? list[2] : nil)

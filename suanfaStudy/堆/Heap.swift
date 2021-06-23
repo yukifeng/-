@@ -21,6 +21,7 @@ class Heap<E:Comparable> {
     init(elements:inout [E], rule: SortRule = .BigTop) {
         self.sortRule = rule
         if elements.count == 0 {
+            size = 0
             self.elements = Array()
         }else{
             size = elements.count

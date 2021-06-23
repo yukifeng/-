@@ -7,9 +7,9 @@
 
 import Foundation
 
-class UnionFindObj<E:Equatable> {
+class UnionFindObj<E: Hashable> {
     
-    let map = NSMutableDictionary()
+    var map = [E: UFNode<E>]()
     
     func makeSet(e:E){
         let node = UFNode(value: e)
@@ -18,7 +18,7 @@ class UnionFindObj<E:Equatable> {
     }
     
     private func changeToNode(e:E) -> UFNode<E>{
-        return map[e] as! UFNode<E>
+        return map[e]!
     }
     
     private func findNode(e:E) -> UFNode<E>{
@@ -55,11 +55,12 @@ class UnionFindObj<E:Equatable> {
     }
     
     func isSame(e1:E,e2:E) -> Bool{
-        return findNode(e: e1).isEqual(findNode(e: e2))
+        return findNode(e: e1) == findNode(e: e2)
     }
     
     
-    class UFNode<E>:NSObject {
+    class UFNode<E: Equatable>: Equatable {
+        
         var parent:UFNode?
         var value:E
         var rank:Int
@@ -68,6 +69,10 @@ class UnionFindObj<E:Equatable> {
         init(value:E) {
             self.value = value
             rank = 1
+        }
+        
+        static func == (lhs: UFNode<E>, rhs: UFNode<E>) -> Bool {
+            return lhs.value == rhs.value
         }
     }
 }
