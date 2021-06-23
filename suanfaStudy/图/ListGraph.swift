@@ -220,7 +220,7 @@ class ListGraph<V: Hashable, E: Comparable>: Graph<V, E> {
     }
     
     override func mst() -> Set<EdgeInfo<V, E>> {
-        return prim()
+        return arc4random() % 10 > 4 ? prim() : kruskal()
     }
     
     private func prim() -> Set<EdgeInfo<V, E>> {
@@ -259,11 +259,13 @@ class ListGraph<V: Hashable, E: Comparable>: Graph<V, E> {
         var edgeInfos = Set<EdgeInfo<V, E>>()
         let unionFind = UnionFindObj<Vertex<V, E>>()
         var edgeList = [Edge<V, E>]()
+        // 所有边加入堆
         edges.forEach { (edge) in
             edgeList.append(edge)
         }
         let minHeap = Heap(elements: &edgeList, rule: .SmallTop)
         vertices.forEach { (key,vertex) in
+            // 每条边自成一个并查集集合
             unionFind.makeSet(e: vertex)
         }
         
@@ -271,7 +273,9 @@ class ListGraph<V: Hashable, E: Comparable>: Graph<V, E> {
             let e = minHeap.remove()!
             let v1 = e.to
             let v2 = e.from
+            // 如果最小边的头尾在同一集合证明该边和树形成了环
             if unionFind.isSame(e1: v1, e2: v2) { continue }
+            // 合并成同一集合
             unionFind.union(e1: v1, e2: v2)
             edgeInfos.insert(e.convertToEdgeInfo())
         }
