@@ -8,11 +8,18 @@
 
 import Foundation
 
+enum SortRule {
+    case BigTop // 大顶堆
+    case SmallTop // 小顶堆
+}
+
 class Heap<E:Comparable> {
     var elements:[E] = []
     var size:Int = 10
+    var sortRule: SortRule = .BigTop
     
-    init(elements:inout [E]) {
+    init(elements:inout [E], rule: SortRule = .BigTop) {
+        self.sortRule = rule
         if elements.count == 0 {
             self.elements = Array()
         }else{
@@ -42,6 +49,7 @@ class Heap<E:Comparable> {
     /// 添加元素
     /// - Parameter element: <#element description#>
     /// - Returns: <#description#>
+    @discardableResult
     func add(element:E) -> [E] {
         size += 1
         elements.append(element)
@@ -57,15 +65,17 @@ class Heap<E:Comparable> {
     
     /// 删除堆顶元素
     /// - Returns: <#description#>
-    func remove() -> [E] {
-        guard elements.count > 1 else {
-            return []
+    func remove() -> E? {
+        guard elements.count > 0 else {
+            return nil
         }
+        
+        let oldElement = elements[0]
         elements[0] = elements.last!
         elements.remove(at: elements.count - 1)
         size -= 1
         siftDown(indexShape: 0)
-        return elements
+        return oldElement
     }
     
     /// // 删除堆顶元素的同时插入一个新元素
@@ -105,8 +115,14 @@ class Heap<E:Comparable> {
         
         while index > 0{
             let fatherIndex = (index - 1) >> 1
-            if elements[fatherIndex] > element {
-                break
+            if self.sortRule == .BigTop {
+                if elements[fatherIndex] > element {
+                    break
+                }
+            }else{
+                if elements[fatherIndex] < element {
+                    break
+                }
             }
             elements[index] = elements[fatherIndex]
             index = fatherIndex
@@ -117,6 +133,9 @@ class Heap<E:Comparable> {
     /// 让index位置的元素下滤
     /// - Parameter index: <#index description#>
     private func siftDown(indexShape:Int){
+        guard elements.count > 0 else {
+            return
+        }
         var index = indexShape
         let element = elements[index]
         let half = size >> 1
@@ -134,11 +153,11 @@ class Heap<E:Comparable> {
             // 右子节点
             let rightChildIndex = (index << 1) + 2
             // 默认左子节点与父节点进行比较
-            if rightChildIndex < size && elements[rightChildIndex] > elements[leftChildIndex] {
+            if rightChildIndex < size && (sortRule == .BigTop ? elements[rightChildIndex] > elements[leftChildIndex] : elements[rightChildIndex] < elements[leftChildIndex]) {
                 leftChild = elements[rightChildIndex]
                 leftChildIndex = rightChildIndex
             }
-            if element > leftChild {
+            if sortRule == .BigTop ? element > leftChild : element < leftChild {
                 break
             }
             // 将子节点存放到index位置

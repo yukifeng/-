@@ -18,7 +18,22 @@ class SecViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        graphDfs()
+        mstP()
+    }
+    
+    private func mstP() {
+        let graph = ListGraph<Int,Int>()
+        for list in mstData1 {
+            graph.addEdge(from: list[0], to: list[1], weight: list.count > 2 ? list[2] : nil)
+            graph.addEdge(from: list[1], to: list[0], weight: list.count > 2 ? list[2] : nil)
+        }
+        let mst = graph.mst()
+        print(mst)
+    }
+    
+    private func topoTest() {
+//        let sort = directedGraph(datas: topoData).topologicalSort()
+//        print(sort)
     }
     
     private func graphbfs() {
@@ -31,9 +46,9 @@ class SecViewController: UIViewController {
 //        undirectedGraph(datas: data3).bfs(begin: 0) { (str) in
 //            print(str as! Int)
 //        }
-        directedGraph(datas: data4).bfs(begin: 5) { (str) in
-            print(str as! Int)
-        }
+//        directedGraph(datas: data4).bfs(begin: 5) { (str) in
+//            print(str as! Int)
+//        }
     }
     
     private func graphDfs() {
@@ -52,9 +67,9 @@ class SecViewController: UIViewController {
 //        undirectedGraph(datas: data5).dfs(begin: 0) { (str) in
 //            print(str as! Int)
 //        }
-        directedGraph(datas: data6).dfs(begin: "e") { (str) in
-            print(str as! String)
-        }
+//        directedGraph(datas: data6).dfs(begin: "e") { (str) in
+//            print(str as! String)
+//        }
     }
     
     private func graph() {
@@ -376,22 +391,22 @@ class SecViewController: UIViewController {
     }
 
     
-    private func directedGraph(datas: [[AnyHashable]]) -> ListGraph<AnyHashable,AnyHashable> {
-        let graph = ListGraph<AnyHashable,AnyHashable>()
-        for list in datas {
-            graph.addEdge(from: list[0], to: list[1], weight: list.count > 2 ? list[2] : nil)
-        }
-        return graph
-    }
+//    private func directedGraph(datas: [[AnyHashable]]) -> ListGraph<AnyHashable,AnyHashable> {
+//        let graph = ListGraph<AnyHashable,AnyHashable>()
+//        for list in datas {
+//            graph.addEdge(from: list[0], to: list[1], weight: list.count > 2 ? list[2] : nil)
+//        }
+//        return graph
+//    }
     
-    private func undirectedGraph(datas: [[AnyHashable]]) -> ListGraph<AnyHashable,AnyHashable> {
-        let graph = ListGraph<AnyHashable,AnyHashable>()
-        for list in datas {
-            graph.addEdge(from: list[0], to: list[1], weight: list.count > 2 ? list[2] : nil)
-            graph.addEdge(from: list[1], to: list[0], weight: list.count > 2 ? list[2] : nil)
-        }
-        return graph
-    }
+//    private func undirectedGraph(datas: [[AnyHashable]]) -> ListGraph<AnyHashable,AnyHashable> {
+//        let graph = ListGraph<AnyHashable,AnyHashable>()
+//        for list in datas {
+//            graph.addEdge(from: list[0], to: list[1], weight: list.count > 2 ? list[2] : nil)
+//            graph.addEdge(from: list[1], to: list[0], weight: list.count > 2 ? list[2] : nil)
+//        }
+//        return graph
+//    }
 }
 
 

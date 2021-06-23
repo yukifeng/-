@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ListGraph<V: Hashable, E: Equatable>: Graph {
+class ListGraph<V: Hashable, E: Comparable>: Graph<V, E> {
     
     typealias E = E
     
@@ -42,15 +42,15 @@ class ListGraph<V: Hashable, E: Equatable>: Graph {
         }
     }
     
-    func edgesSize() -> Int {
+    override func edgesSize() -> Int {
         return edges.count
     }
     
-    func verticesSize() -> Int {
+    override func verticesSize() -> Int {
         return vertices.count
     }
     
-    func addVertex(_ v: V) {
+    override func addVertex(_ v: V) {
         // 已经存在顶点return
         if vertices.contains(where: { (key,value) -> Bool in
             v == key
@@ -62,7 +62,7 @@ class ListGraph<V: Hashable, E: Equatable>: Graph {
         vertices[v] = Vertex(value: v)
     }
     
-    func addEdge(from: V, to: V, weight: E?) {
+    override func addEdge(from: V, to: V, weight: E?) {
         // 顶点集合查找顶点
         var fromVertex = vertices[from]
         // 不存在创建新顶点
@@ -95,11 +95,11 @@ class ListGraph<V: Hashable, E: Equatable>: Graph {
         edges.insert(edge)
     }
     
-    func addEdge(from: V, to: V) {
+    override func addEdge(from: V, to: V) {
         addEdge(from: from, to: to, weight: nil)
     }
     
-    func removeVertex(_ v: V) {
+    override func removeVertex(_ v: V) {
         let vertex = vertices[v]
         guard vertex != nil else {
             return
@@ -124,7 +124,7 @@ class ListGraph<V: Hashable, E: Equatable>: Graph {
         
     }
     
-    func removeEdge(from: V, to: V, weight: E?) {
+    override func removeEdge(from: V, to: V, weight: E?) {
         let fromVertex = vertices[from]
         let toVertex = vertices[to]
         // 找到该条边
@@ -140,11 +140,11 @@ class ListGraph<V: Hashable, E: Equatable>: Graph {
         }
     }
     
-    func removeEdge(from: V, to: V) {
+    override func removeEdge(from: V, to: V) {
         removeEdge(from: from, to: to, weight: nil)
     }
     
-    func bfs(begin: V, visitor: (V) -> ()) {
+    override func bfs(begin: V, visitor: (V) -> ()) {
         let beginVertex = vertices[begin]
         guard beginVertex != nil else { return }
         var visitedVertex = Set<Vertex<V, E>>() // 记录已经遍历过的节点
@@ -164,7 +164,7 @@ class ListGraph<V: Hashable, E: Equatable>: Graph {
         }
     }
     
-    func dfs(begin: V, visitor: (V) -> ()) {
+    override func dfs(begin: V, visitor: (V) -> ()) {
         let beginVertex = vertices[begin]
         guard beginVertex != nil else { return }
         var visitedVertex = Set<Vertex<V, E>>() // 记录已经遍历过的节点
@@ -173,6 +173,39 @@ class ListGraph<V: Hashable, E: Equatable>: Graph {
             visitor(beginVertex!.value!)
         }
         dfs(begin: beginVertex!, visitor: visitor, visitedVertex: &visitedVertex)
+    }
+    
+      func topologicalSort() -> [V] {
+        var result = [V]()
+        // 顶点: 入度的map，模拟有几条入度边
+        var tempMap = [Vertex<V, E>: Int]()
+        // 队列放顶点
+        var queue = [Vertex<V, E>]()
+        vertices.forEach { (key, vertex) in
+            if vertex.inEdges.count == 0 {
+                queue.append(vertex)
+            }else {
+                tempMap[vertex] = vertex.inEdges.count
+            }
+        }
+        
+        while !queue.isEmpty {
+            // 出队
+            let vertex = queue[0]
+            result.append(vertex.value!)
+            queue.remove(at: 0)
+            // 更新出度的节点
+            vertex.outEdges.forEach { (edge) in
+                let toVertex = edge.to // 顶点指向的点
+                let newCount = tempMap[toVertex]! - 1 // 模拟删除入度
+                if newCount == 0 {
+                    queue.append(toVertex) // 度为0入队
+                }else {
+                    tempMap[toVertex] = newCount // 更新入度
+                }
+            }
+        }
+        return result
     }
     
     private func dfs(begin: Vertex<V, E>, visitor: (V) -> (), visitedVertex: inout Set<Vertex<V, E>>) {
@@ -186,7 +219,41 @@ class ListGraph<V: Hashable, E: Equatable>: Graph {
         }
     }
     
-    private class Vertex<V: Hashable, E: Equatable>: Hashable,CustomStringConvertible {
+    override func mst() -> Set<EdgeInfo<V, E>> {
+        return prim()
+    }
+    
+    private func prim() -> Set<EdgeInfo<V, E>> {
+        guard vertices.count > 0 else { return Set() }
+        // 已经被添加过的顶点集合
+        var addedVertices = Set<Vertex<V, E>>()
+        // 返回结果集合
+        var edgeInfos = Set<EdgeInfo<V, E>>()
+        let vertex = vertices.first!.value
+        var array = [Edge<V, E>]()
+        addedVertices.insert(vertex)
+        // 将第一个顶点的出边建堆
+        vertex.outEdges.forEach { (edge) in
+            array.append(edge)
+        }
+        let minHeap = Heap(elements: &array, rule: .SmallTop)
+        // 最小生成树顶点是图顶点的数量-1
+        while !minHeap.isEmpty() && addedVertices.count < vertices.count {
+            // 拿出最小边
+            let edge = minHeap.remove()!
+            if addedVertices.contains(edge.to) { continue }
+            edgeInfos.insert(edge.convertToEdgeInfo())
+            addedVertices.insert(edge.to)
+            // 将该边的顶点的所有出边加入堆中
+            edge.to.outEdges.forEach { (e) in
+                minHeap.add(element: e)
+            }
+        }
+        
+        return edgeInfos
+    }
+    
+    private class Vertex<V: Hashable, E: Comparable>: Hashable,CustomStringConvertible {
         
         var value: V?
         var inEdges = Set<Edge<V, E>>()
@@ -209,7 +276,7 @@ class ListGraph<V: Hashable, E: Equatable>: Graph {
         }
     }
     
-    private class Edge<V: Hashable, E: Equatable>: Hashable,CustomStringConvertible {
+    private class Edge<V: Hashable, E: Comparable>: Hashable,CustomStringConvertible,WeightCalcu {
         
         var from: Vertex<V, E>
         var to: Vertex<V, E>
@@ -228,9 +295,17 @@ class ListGraph<V: Hashable, E: Equatable>: Graph {
             return lhs.from == rhs.from && lhs.to == rhs.to && lhs.weight == rhs.weight
         }
         
+        static func < (lhs: Edge<V, E>, rhs: Edge<V, E>) -> Bool {
+            return lhs.weight! < rhs.weight!
+        }
+        
         func hash(into hasher: inout Hasher) {
             hasher.combine(from)
             hasher.combine(to)
+        }
+        
+        func convertToEdgeInfo() -> EdgeInfo <V, E> {
+            return EdgeInfo(from: from.value!, to: to.value!, weight: weight)
         }
     }
 }
