@@ -17,13 +17,18 @@ class UnionFindObj<E: Hashable> {
         map[e] = node
     }
     
-    private func changeToNode(e:E) -> UFNode<E>{
-        return map[e]!
+    private func changeToNode(e:E) -> UFNode<E>?{
+        return map[e]
     }
     
-    private func findNode(e:E) -> UFNode<E>{
-        var node = changeToNode(e: e)
-        
+    /// 返回元素所在链表的根节点
+    /// - Parameter e: <#e description#>
+    /// - Returns: <#description#>
+    private func findNode(e:E) -> UFNode<E>?{
+        guard changeToNode(e: e) != nil else {
+            return nil
+        }
+        var node = changeToNode(e: e)!
         
         while node.parent!.value != node.value {
             node.parent = node.parent!.parent!
@@ -33,15 +38,18 @@ class UnionFindObj<E: Hashable> {
         return node
     }
     
-    func find(e:E) -> E{
+    func find(e:E) -> E?{
         let node = findNode(e: e)
         
-        return node.value
+        return node?.value
     }
     
     func union(e1:E,e2:E){
-        let p1 = findNode(e: e1)
-        let p2 = findNode(e: e2)
+        guard findNode(e: e1) != nil && findNode(e: e2) != nil else {
+            return
+        }
+        let p1 = findNode(e: e1)!
+        let p2 = findNode(e: e2)!
         if p1.value == p2.value  { return }
         
         if p1.rank < p2.rank {

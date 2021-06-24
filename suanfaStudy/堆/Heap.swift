@@ -95,17 +95,17 @@ class Heap<E:Comparable> {
     
     /// 原地建堆
     private func heapify(){
-        var index = 1
-        while index < size{
-            siftUp(indexShape:index)
-            index += 1
-        }
-        
-//        var index = (size >> 1) - 1
-//        while index >= 0 {
-//            siftDown(indexShape: index)
-//            index = index - 1
+//        var index = 1
+//        while index < size{
+//            siftUp(indexShape:index)
+//            index += 1
 //        }
+        
+        var index = (size >> 1) - 1
+        while index >= 0 {
+            siftDown(indexShape: index)
+            index = index - 1
+        }
     }
     
     /// 让index位置的元素上滤
