@@ -18,7 +18,54 @@ class SecViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        mst2()
+        shortPath2()
+    }
+    
+    
+    private func shortPath3() {
+        let graph = ListGraph<Int,Int>()
+        for list in shortPathData3 {
+//            graph.addEdge(from: list[0] as! Int, to: list[1] as! Int, weight: list[2] as! Int)
+            graph.addEdge(from: list[0], to: list[1], weight: list[2])
+        }
+
+        let sp = graph.shortPath(0)
+        sp.forEach { (key, value) in
+            print("target:\(key)")
+            print(value)
+            print("--------------------")
+            
+        }
+    }
+    ///　负权边
+    private func shortPath2() {
+        let graph = ListGraph<String,Int>()
+        for list in shortPathData2 {
+            graph.addEdge(from: list[0] as! String, to: list[1] as! String, weight: list[2] as! Int)
+        }
+
+        let sp = graph.shortPath("A")
+        sp.forEach { (key, value) in
+            print("target:\(key)")
+            print(value)
+            print("--------------------")
+            
+        }
+    }
+    
+    private func shortPath() {
+        let graph = ListGraph<String,Int>()
+        for list in shortPathData {
+            graph.addEdge(from: list[0] as! String, to: list[1] as! String, weight: list[2] as! Int)
+        }
+
+        let sp = graph.shortPath("A")
+        sp.forEach { (key, value) in
+            print("target:\(key)")
+            print(value)
+            print("--------------------")
+            
+        }
     }
     
     private func mst2() {

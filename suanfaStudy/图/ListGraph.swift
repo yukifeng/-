@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ListGraph<V: Hashable, E: Comparable>: Graph<V, E> {
+class ListGraph<V: Hashable, E: Comparable & Numeric>: Graph<V, E> {
     
     typealias E = E
     
@@ -284,7 +284,133 @@ class ListGraph<V: Hashable, E: Comparable>: Graph<V, E> {
         return edgeInfos
     }
     
-    private class Vertex<V: Hashable, E: Comparable>: Hashable,CustomStringConvertible {
+    override func shortPath(_ begin: V, type: shortPathType = .bellmanford) -> [V: PathInfo<V, E>] {
+        if type == .dijkstra {
+            return dijkstra(begin)
+        }
+        return bellmanFord(begin)
+    }
+    
+    private func dijkstra(_ begin: V) -> [V: PathInfo<V, E>] {
+        guard vertices[begin] != nil else { return [:] }
+        let beginVertex = vertices[begin]!
+        // 被选中的最短路径map
+        var selectedPaths = [V: PathInfo<V, E>]()
+        
+        // 保存所有待选择的路径
+        var paths = [Vertex<V, E>: PathInfo<V, E>]()
+        
+        // 将目标的直连的顶点放入待选择paths中
+        beginVertex.outEdges.forEach { (edge) in
+            // 起始点都是直连线，edge的weight就是path的weight
+            var pathInfo = PathInfo<V, E>(weight: edge.weight!)
+            pathInfo.edgeInfos.append(edge.convertToEdgeInfo())
+            paths[edge.to] = pathInfo
+        }
+        while !paths.isEmpty {
+            // 返回最短路径元组（顶点，pathInfo）
+            let minPath = getMinPath(paths: paths)
+            selectedPaths[minPath.0.value!] = minPath.1
+            // 已选好的顶点和路径信息从待选paths中移除
+            paths.removeValue(forKey: minPath.0)
+            
+            // 选出最短路径后，纳刀最短路径的出度的边进行松弛操作
+            for edge in minPath.0.outEdges {
+                // 出度的点已经保存在已经选中的最短路径内，跳过
+                if selectedPaths.keys.contains(edge.to.value!) { continue }
+                relaxDijkstra(minPath: minPath, paths: &paths, edge: edge)
+            }
+        }
+        // 移除自己
+        selectedPaths.removeValue(forKey: begin)
+        return selectedPaths
+    }
+    
+    /// 松弛
+    /// - Parameters:
+    ///   - minPath: <#minPath description#>
+    ///   - paths: <#paths description#>
+    ///   - edge: <#edge description#>
+    private func relaxDijkstra(minPath: (Vertex<V, E>, PathInfo<V, E>), paths: inout [Vertex<V, E>: PathInfo<V, E>], edge: Edge<V, E>) {
+        // 选出的最短边和出度的边相加算出新的可选路径权重
+        let newWeight = minPath.1.weight + edge.weight!
+        // 拿出原顶点保存的路径权重
+        let oldWeight = paths[edge.to]?.weight
+        // 对比
+        if oldWeight == nil || newWeight < oldWeight! {
+            var newPathInfo = PathInfo<V, E>(weight: newWeight)
+            newPathInfo.edgeInfos.append(contentsOf: minPath.1.edgeInfos)
+            newPathInfo.edgeInfos.append(edge.convertToEdgeInfo())
+            paths[edge.to] = newPathInfo
+        }
+    }
+    
+    /// 从paths中选出一个最小的路径
+    /// - Parameter paths: <#paths description#>
+    /// - Returns: <#description#>
+    private func getMinPath(paths: [Vertex<V, E>: PathInfo<V, E>]) -> (Vertex<V, E>, PathInfo<V, E>) {
+        var minTuples: (Vertex<V, E>, PathInfo<V, E>)?
+        paths.forEach { (key,value) in
+            if minTuples == nil || value.weight < minTuples!.1.weight {
+                minTuples = (key, value)
+            }
+        }
+        return minTuples!
+    }
+    
+    private func bellmanFord(_ begin: V) -> [V: PathInfo<V, E>] {
+        guard vertices[begin] != nil else { return [:] }
+        // 被选中的最短路径map
+        var selectedPaths = [V: PathInfo<V, E>]()
+        
+        selectedPaths[begin] = PathInfo(weight: 0)
+        
+        for _ in 0..<vertices.count - 1 {
+            for edge in edges {
+                let fromPath = selectedPaths[edge.from.value!]
+                if fromPath == nil { continue }
+                relaxBellmanFord(edge: edge, fromPath: fromPath!, paths: &selectedPaths)
+            }
+        }
+        
+        for edge in edges {
+            let fromPath = selectedPaths[edge.from.value!]
+            if fromPath == nil { continue }
+            if (relaxBellmanFord(edge: edge, fromPath: fromPath!, paths: &selectedPaths)) {
+                print("有负权环")
+                selectedPaths.removeAll()
+                break
+            }
+        }
+        // 移除自己
+        selectedPaths.removeValue(forKey: begin)
+        return selectedPaths
+    }
+    
+    /// 松弛
+    /// - Parameters:
+    ///   - edge: 需要进行松弛的边
+    ///   - fromPath: edge的from的最短路径信息
+    ///   - paths: 存放着其他点的最短路径信息
+    /// - Returns: <#description#>
+    @discardableResult
+    private func relaxBellmanFord(edge: Edge<V, E>, fromPath: PathInfo<V, E>, paths: inout [V: PathInfo<V, E>]) -> Bool {
+        // 选出的最短边和出度的边相加算出新的可选路径权重
+        let newWeight = fromPath.weight + edge.weight!
+        // 拿出原顶点保存的路径权重
+        let oldWeight = paths[edge.to.value!]?.weight
+        // 对比
+        if oldWeight == nil || oldWeight == 0 || newWeight < oldWeight! {
+            var newPathInfo = PathInfo<V, E>(weight: newWeight)
+            newPathInfo.edgeInfos.append(contentsOf: fromPath.edgeInfos)
+            newPathInfo.edgeInfos.append(edge.convertToEdgeInfo())
+            paths[edge.to.value!] = newPathInfo
+            return true
+        }
+        return false
+    }
+    
+    private class Vertex<V: Hashable, E: Comparable & Numeric>: Hashable,CustomStringConvertible {
         
         var value: V?
         var inEdges = Set<Edge<V, E>>()
@@ -307,7 +433,7 @@ class ListGraph<V: Hashable, E: Comparable>: Graph<V, E> {
         }
     }
     
-    private class Edge<V: Hashable, E: Comparable>: Hashable,CustomStringConvertible,WeightCalcu {
+    private class Edge<V: Hashable, E: Comparable & Numeric>: Hashable,CustomStringConvertible,Comparable {
         
         var from: Vertex<V, E>
         var to: Vertex<V, E>
@@ -328,6 +454,10 @@ class ListGraph<V: Hashable, E: Comparable>: Graph<V, E> {
         
         static func < (lhs: Edge<V, E>, rhs: Edge<V, E>) -> Bool {
             return lhs.weight! < rhs.weight!
+        }
+        
+        static func + (lhs: Edge<V, E>, rhs: Edge<V, E>) -> E {
+            return lhs.weight! + rhs.weight!
         }
         
         func hash(into hasher: inout Hasher) {

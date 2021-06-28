@@ -13,8 +13,12 @@ protocol WeightCalcu: Comparable {
 //    associatedtype E
 }
 
+enum shortPathType {
+    case dijkstra
+    case bellmanford
+}
+
 class Graph<V: Hashable, E: Equatable>  {
-    
     /// 边的数量
     func edgesSize() -> Int { return 0 }
     
@@ -62,22 +66,38 @@ class Graph<V: Hashable, E: Equatable>  {
     /// - Parameter begin: <#begin description#>
     func dfs(begin: V, visitor: (V) -> ()) {}
     
+    /// 最小生成树
+    /// - Returns: <#description#>
     func mst() -> Set<EdgeInfo<V, E>> { return Set() }
     
+    /// 最短路径
+    /// - Parameter begin: <#begin description#>
+    /// - Returns: <#description#>
+    func shortPath(_ begin: V, type: shortPathType = .bellmanford) -> [V: PathInfo<V, E>] { return [:] }
     
-}
-
-struct EdgeInfo<V:Hashable, E: Equatable>: Hashable {
-    var from: V
-    var to: V
-    var weight: E?
-    
-    static func == (lhs: EdgeInfo, rhs: EdgeInfo) -> Bool {
-        return lhs.from == rhs.from && lhs.to == rhs.to && lhs.weight == rhs.weight
+    struct EdgeInfo<V:Hashable, E: Equatable>: Hashable {
+        var from: V
+        var to: V
+        var weight: E?
+        
+        static func == (lhs: EdgeInfo, rhs: EdgeInfo) -> Bool {
+            return lhs.from == rhs.from && lhs.to == rhs.to && lhs.weight == rhs.weight
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(from)
+            hasher.combine(to)
+        }
     }
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(from)
-        hasher.combine(to)
+    /// 路径模型，存放总路径长度和经过的所有边的信息
+    struct PathInfo<V:Hashable, E: Equatable>: CustomStringConvertible {
+        var weight: E
+        var edgeInfos = [EdgeInfo<V, E>]()
+        
+        
+        var description: String {
+            return "PathInfo [weight= \(weight) , edgeInfos= \(edgeInfos)  ]"
+        }
     }
 }
