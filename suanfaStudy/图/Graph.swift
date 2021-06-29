@@ -10,7 +10,7 @@ import Foundation
 
 protocol WeightCalcu: Comparable {
     
-//    associatedtype E
+    static var WeightMax: Self { get }
 }
 
 enum shortPathType {
@@ -18,7 +18,7 @@ enum shortPathType {
     case bellmanford
 }
 
-class Graph<V: Hashable, E: Equatable>  {
+class Graph<V: Hashable, E: Equatable & Numeric>  {
     /// 边的数量
     func edgesSize() -> Int { return 0 }
     
@@ -75,6 +75,8 @@ class Graph<V: Hashable, E: Equatable>  {
     /// - Returns: <#description#>
     func shortPath(_ begin: V, type: shortPathType = .bellmanford) -> [V: PathInfo<V, E>] { return [:] }
     
+    func shortPath() -> [V: [V: PathInfo<V, E>]] { return [:] }
+    
     struct EdgeInfo<V:Hashable, E: Equatable>: Hashable {
         var from: V
         var to: V
@@ -91,7 +93,8 @@ class Graph<V: Hashable, E: Equatable>  {
     }
     
     /// 路径模型，存放总路径长度和经过的所有边的信息
-    struct PathInfo<V:Hashable, E: Equatable>: CustomStringConvertible {
+    struct PathInfo<V:Hashable, E: Equatable & Numeric>: CustomStringConvertible {
+        
         var weight: E
         var edgeInfos = [EdgeInfo<V, E>]()
         

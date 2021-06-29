@@ -18,9 +18,26 @@ class SecViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        shortPath2()
+        spMutil()
     }
     
+    private func spMutil() {
+        let graph = ListGraph<String,Int>()
+        for list in shortPathData2 {
+            graph.addEdge(from: list[0] as! String, to: list[1] as! String, weight: list[2] as! Int)
+        }
+
+        let sp = graph.shortPath()
+        sp.forEach { (key, value) in
+            print("==============\(key)==================")
+            value.forEach { (k,value) in
+                print("target:\(k)")
+                print(value)
+                print("--------------------")
+            }
+            
+        }
+    }
     
     private func shortPath3() {
         let graph = ListGraph<Int,Int>()
@@ -482,5 +499,12 @@ class Person: Hashable {
     init(name: String, age: Int) {
         self.name = name
         self.age = age
+    }
+}
+
+
+extension Int:WeightCalcu {
+    static var WeightMax: Int {
+        return Int.max
     }
 }

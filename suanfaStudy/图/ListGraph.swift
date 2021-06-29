@@ -284,6 +284,57 @@ class ListGraph<V: Hashable, E: Comparable & Numeric>: Graph<V, E> {
         return edgeInfos
     }
     
+    override func shortPath() -> [V: [V: PathInfo<V, E>]] {
+        // 对应关系paths的key是begin点，paths[value]的key是目标点，paths[value]的value是存储的路径信息
+        var paths = [V: [V: PathInfo<V, E>]]()
+        // 初始化，将以存在的路径保存在map内
+        edges.forEach { (edge) in
+            var map = paths[edge.from.value!]
+            if map == nil {
+                map = [V: PathInfo<V, E>]()
+            }
+            var pathInfo = PathInfo<V, E>(weight: edge.weight!)
+            pathInfo.edgeInfos.append(edge.convertToEdgeInfo())
+            map![edge.to.value!] = pathInfo
+            paths[edge.from.value!] = map
+        }
+        
+        for (v1,_) in vertices {
+            for (v2,_) in vertices {
+                for (v3,_) in vertices {
+                    // 顶点是相同时跳过循环
+                    if v1 == v2 || v2 == v3 || v3 == v1 { continue }
+                    let path12 = paths[v1]?[v2]
+                    let path23 = paths[v2]?[v3]
+                    // 顶点为空时跳过循环
+                    if path12 == nil { continue }
+                    if path23 == nil { continue }
+                    let path13 = paths[v1]?[v3]
+                    // 将新找到的路径的权制与原来存在路径path13进行对比
+                    let newWeight = path12!.weight + path23!.weight
+                    
+                    if (path13 != nil && newWeight >= path13!.weight) {
+                        continue
+                    }
+                    
+                    // path13 == nil 或者path13.weight > newWight
+                    if path13 == nil {
+                        // 初始化map【value】【value】
+                        paths[v1]?[v3] = PathInfo(weight: newWeight)
+                    }else {
+                        // 移除原路径信息
+                        paths[v1]?[v3]?.edgeInfos.removeAll()
+                    }
+                    // 更新路径信息
+                    paths[v1]?[v3]?.weight = newWeight
+                    paths[v1]?[v3]?.edgeInfos.append(contentsOf: path12!.edgeInfos)
+                    paths[v1]?[v3]?.edgeInfos.append(contentsOf: path23!.edgeInfos)
+                }
+            }
+        }
+        return paths
+    }
+    
     override func shortPath(_ begin: V, type: shortPathType = .bellmanford) -> [V: PathInfo<V, E>] {
         if type == .dijkstra {
             return dijkstra(begin)
