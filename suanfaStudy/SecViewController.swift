@@ -18,7 +18,11 @@ class SecViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        spMutil()
+        Recursion().hanNuoTa(4, p1: "A", p2: "B", p3: "C")
+    }
+    
+    private func queen() {
+        NEmpress().setQueenNum(4)
     }
     
     private func spMutil() {

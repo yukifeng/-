@@ -81,7 +81,7 @@ class suanfaStudyTests: XCTestCase {
         heapVerify()
         array = heap.add(element: 333)
         heapVerify()
-        array = heap.remove()
+        let _ = heap.remove()
         heapVerify()
         array = heap.replace(element: 1)
         heapVerify()
