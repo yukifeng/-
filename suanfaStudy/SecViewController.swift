@@ -18,6 +18,31 @@ class SecViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bigSum()
+    }
+    
+    private func kebiao() {
+       print( FindOrder().findOrder(3, [[1,0]]))
+    }
+    
+    private func longCommonSeq() {
+        print(LonggestCommonSubsequence().longgestCommonSubsequence(nums1: [1,3,5,9,10], nums2: [1,4,9,10]))
+    }
+    
+    private func longSeq() {
+        print(LongestSubsequence.longestRisingSubseq())
+    }
+    
+    private func bigSum() {
+        print(BiggestSubsequenceSum.subSeqSum([5,4,-1,7,8]))
+    }
+    
+    private func coins() {
+        let a = Coin().minCoins4(money: 19, nums: [1,5,20,25])
+        print(a)
+    }
+    
+    private func hannuota() {
         Recursion().hanNuoTa(4, p1: "A", p2: "B", p3: "C")
     }
     
@@ -503,12 +528,5 @@ class Person: Hashable {
     init(name: String, age: Int) {
         self.name = name
         self.age = age
-    }
-}
-
-
-extension Int:WeightCalcu {
-    static var WeightMax: Int {
-        return Int.max
     }
 }

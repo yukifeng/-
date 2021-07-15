@@ -49,6 +49,11 @@
 		00EEE3C326563BAE0026147E /* 530. 二叉搜索树的最小绝对差.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EEE3C226563BAE0026147E /* 530. 二叉搜索树的最小绝对差.swift */; };
 		00EEE3C7265642440026147E /* 98. 验证二叉搜索树.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EEE3C6265642440026147E /* 98. 验证二叉搜索树.swift */; };
 		00EEE3CB265654E50026147E /* 230. 二叉搜索树中第K小的元素.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00EEE3CA265654E50026147E /* 230. 二叉搜索树中第K小的元素.swift */; };
+		2C1BCC902698377E001CAD2C /* 硬币问题.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1BCC8F2698377E001CAD2C /* 硬币问题.swift */; };
+		2C1BCC92269D7C26001CAD2C /* 最大连续子序列和.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1BCC91269D7C26001CAD2C /* 最大连续子序列和.swift */; };
+		2C1BCC94269D839B001CAD2C /* 最长上升子序列.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1BCC93269D839B001CAD2C /* 最长上升子序列.swift */; };
+		2C1BCC96269EC7E4001CAD2C /* 最长公共子序列.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1BCC95269EC7E4001CAD2C /* 最长公共子序列.swift */; };
+		2C1BCC99269FD766001CAD2C /* 210. 课程表 II.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C1BCC98269FD766001CAD2C /* 210. 课程表 II.swift */; };
 		FE04D47C269451B00065F036 /* N皇后.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE04D47B269451B00065F036 /* N皇后.swift */; };
 		FE9FED3C24E2A00100173EEC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9FED3B24E2A00100173EEC /* AppDelegate.swift */; };
 		FE9FED3E24E2A00100173EEC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9FED3D24E2A00100173EEC /* SceneDelegate.swift */; };
@@ -115,6 +120,11 @@
 		00EEE3C226563BAE0026147E /* 530. 二叉搜索树的最小绝对差.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "530. 二叉搜索树的最小绝对差.swift"; sourceTree = "<group>"; };
 		00EEE3C6265642440026147E /* 98. 验证二叉搜索树.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "98. 验证二叉搜索树.swift"; sourceTree = "<group>"; };
 		00EEE3CA265654E50026147E /* 230. 二叉搜索树中第K小的元素.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "230. 二叉搜索树中第K小的元素.swift"; sourceTree = "<group>"; };
+		2C1BCC8F2698377E001CAD2C /* 硬币问题.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "硬币问题.swift"; sourceTree = "<group>"; };
+		2C1BCC91269D7C26001CAD2C /* 最大连续子序列和.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "最大连续子序列和.swift"; sourceTree = "<group>"; };
+		2C1BCC93269D839B001CAD2C /* 最长上升子序列.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "最长上升子序列.swift"; sourceTree = "<group>"; };
+		2C1BCC95269EC7E4001CAD2C /* 最长公共子序列.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "最长公共子序列.swift"; sourceTree = "<group>"; };
+		2C1BCC98269FD766001CAD2C /* 210. 课程表 II.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "210. 课程表 II.swift"; sourceTree = "<group>"; };
 		FE04D47B269451B00065F036 /* N皇后.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "N皇后.swift"; sourceTree = "<group>"; };
 		FE9FED3824E2A00100173EEC /* suanfaStudy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = suanfaStudy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FE9FED3B24E2A00100173EEC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -199,6 +209,7 @@
 		004E186426314D6B0093563C /* leetcode */ = {
 			isa = PBXGroup;
 			children = (
+				2C1BCC97269FD746001CAD2C /* 图 */,
 				0058EAB22667878900781DB4 /* 集合 */,
 				0084176A26539865001EDB99 /* 二叉树 */,
 				004E188026314DD30093563C /* 栈 */,
@@ -301,6 +312,25 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
+		2C1BCC8E26983762001CAD2C /* 动态规划 */ = {
+			isa = PBXGroup;
+			children = (
+				2C1BCC8F2698377E001CAD2C /* 硬币问题.swift */,
+				2C1BCC91269D7C26001CAD2C /* 最大连续子序列和.swift */,
+				2C1BCC93269D839B001CAD2C /* 最长上升子序列.swift */,
+				2C1BCC95269EC7E4001CAD2C /* 最长公共子序列.swift */,
+			);
+			path = "动态规划";
+			sourceTree = "<group>";
+		};
+		2C1BCC97269FD746001CAD2C /* 图 */ = {
+			isa = PBXGroup;
+			children = (
+				2C1BCC98269FD766001CAD2C /* 210. 课程表 II.swift */,
+			);
+			path = "图";
+			sourceTree = "<group>";
+		};
 		FE9FED2F24E2A00100173EEC = {
 			isa = PBXGroup;
 			children = (
@@ -323,6 +353,7 @@
 			isa = PBXGroup;
 			children = (
 				004E186426314D6B0093563C /* leetcode */,
+				2C1BCC8E26983762001CAD2C /* 动态规划 */,
 				0017D7EF268EAEAB00EF9572 /* 回溯 */,
 				0017D7EE268EAEA300EF9572 /* 递归 */,
 				005FA8AB267AFA0A005D3012 /* 图 */,
@@ -459,6 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00EEE3BF2656178C0026147E /* 102. 二叉树的层序遍历.swift in Sources */,
+				2C1BCC902698377E001CAD2C /* 硬币问题.swift in Sources */,
 				00C358D826661EBB00C5FAF5 /* TreeMap.swift in Sources */,
 				0058EAB82668724000781DB4 /* HashMap.swift in Sources */,
 				00841767264E5FE6001EDB99 /* AVLTree.swift in Sources */,
@@ -470,6 +502,7 @@
 				0014DAD62679EB1F00287623 /* UnionFindObj.swift in Sources */,
 				00B11B8226301C7C00F7CC5D /* DoubleCircleLinkList.swift in Sources */,
 				004E187A26314DBC0093563C /* 237删除链表中给定的节点.swift in Sources */,
+				2C1BCC92269D7C26001CAD2C /* 最大连续子序列和.swift in Sources */,
 				005FA8B3267B2506005D3012 /* ListGraph.swift in Sources */,
 				005FA8B7267C9150005D3012 /* Data.swift in Sources */,
 				004E187626314DBC0093563C /* 206反转链表.swift in Sources */,
@@ -482,11 +515,14 @@
 				0084176C26539880001EDB99 /* 226. 翻转二叉树.swift in Sources */,
 				0058EAB42667878900781DB4 /* 349. 两个数组的交集.swift in Sources */,
 				004E187B26314DBC0093563C /* 83. 删除排序链表中的重复元素.swift in Sources */,
+				2C1BCC96269EC7E4001CAD2C /* 最长公共子序列.swift in Sources */,
 				00006AA2264910B7000D53C8 /* BinarySearchTree.swift in Sources */,
 				004E188826315B480093563C /* 856. 括号的分数.swift in Sources */,
 				00B11B1E262E73EF00F7CC5D /* Node.swift in Sources */,
 				004E187C26314DBC0093563C /* ListNode.swift in Sources */,
+				2C1BCC99269FD766001CAD2C /* 210. 课程表 II.swift in Sources */,
 				004E188C26325D4C0093563C /* 150. 逆波兰表达式求值.swift in Sources */,
+				2C1BCC94269D839B001CAD2C /* 最长上升子序列.swift in Sources */,
 				00EEE3C326563BAE0026147E /* 530. 二叉搜索树的最小绝对差.swift in Sources */,
 				004E187926314DBC0093563C /* 876. 链表的中间结点.swift in Sources */,
 				00EEE3BB265613090026147E /* 144. 二叉树的前序遍历.swift in Sources */,
